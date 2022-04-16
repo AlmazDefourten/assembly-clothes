@@ -9,7 +9,7 @@
  */
 function inputHiddenIdCardFun($attrs){
 	global $post;
-	echo "<input type='hidden' value='".$post->ID."'/>";
+	return "<input type='hidden' name='cardProductId' value='".$post->ID."'/>";
 }
 
 	add_shortcode('inputHiddenIdCard','inputHiddenIdCardFun');
