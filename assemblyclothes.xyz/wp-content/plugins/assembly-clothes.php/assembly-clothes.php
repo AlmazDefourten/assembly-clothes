@@ -7,12 +7,12 @@
  * Author:      Имя автора
  * Version:     Версия плагина, например 1.0 
  */
-function testShortCode($attrs){
+function inputHiddenIdCardFun($attrs){
 	global $post;
-	echo $post->ID;
+	echo "<input type='hidden' value='".$post->ID."'/>";
 }
 
-	add_shortcode('test','testShortCode');
+	add_shortcode('inputHiddenIdCard','inputHiddenIdCardFun');
 	global $jal_db_version;
 $jal_db_version = "1.0";
 
