@@ -9,7 +9,7 @@
  */
 function testShortCode($attrs){
 	global $post;
-	echo $post->ID;
+	echo "'".$post->ID."'";
 }
 
 	add_shortcode('test','testShortCode');
