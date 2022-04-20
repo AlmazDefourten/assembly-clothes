@@ -73,7 +73,6 @@
 
 
 		];
-		$this->load->database();
 		$wpdb->insert($wpdb->prefix.'cost_estimate');
 
 ?>
