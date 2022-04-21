@@ -18,9 +18,10 @@ function inputHiddenPostNameEstimate($attrs){
 
 function formEstimateFun($attrs){
 	ob_start();
+	global $post;
 	?>
-	<form  action="wp-admin/admin-post.php" method="post">
-[inputHiddenEstimatePost]
+	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
+	<input type="hidden" name="action" value="admin_post_estimate_post" />
 <table style="height: 346px;" width="824">
 <tbody>
 <tr>
@@ -80,7 +81,7 @@ function formEstimateFun($attrs){
 </tr>
 </tbody>
 </table>
-[inputHiddenIdCard]
+<input type='hidden' name='cardProductId' value='<?=$post->ID?>'/>
 <input type="submit" value="Отправить" />
 
 </form>
