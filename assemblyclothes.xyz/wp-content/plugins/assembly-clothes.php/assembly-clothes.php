@@ -12,7 +12,12 @@ function inputHiddenIdCardFun($attrs){
 	return "<input type='hidden' name='cardProductId' value='".$post->ID."'/>";
 }
 
+function inputHiddenPostNameEstimate($attrs){
+	return '<input type="hidden" name="action" value="admin_post_estimate_post" />';
+}
+
 	add_shortcode('inputHiddenIdCard','inputHiddenIdCardFun');
+	add_shortcode('inputHiddenEstimatePost','inputHiddenPostNameEstimate');
 	global $jal_db_version;
 $jal_db_version = "1.0";
 
