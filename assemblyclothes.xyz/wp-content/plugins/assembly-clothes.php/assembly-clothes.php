@@ -16,8 +16,81 @@ function inputHiddenPostNameEstimate($attrs){
 	return '<input type="hidden" name="action" value="admin_post_estimate_post" />';
 }
 
+function formEstimateFun($attrs){
+	ob_start();
+	?>
+	<form  action="wp-admin/admin-post.php" method="post">
+[inputHiddenEstimatePost]
+<table style="height: 346px;" width="824">
+<tbody>
+<tr>
+<th><strong>Услуги</strong></th>
+<th><strong>Стоимость</strong></th>
+<th><strong>Сроки</strong></th>
+</tr>
+<tr>
+<td>Технический рисунок</td>
+<td><input name="techPicPrice" required="" type="text" /></td>
+<td><input name="techPicTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Лекала на базовый размер</td>
+<td><input name="patternsBaseSizePrice" required="" type="text" /></td>
+<td><input name="patternsBaseSize" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Градация на 1 размер</td>
+<td><input name="gradationPrice" required="" type="text" /></td>
+<td><input name="gradationTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Техническое описание модели</td>
+<td><input name="techDescriptionPrice" required="" type="text" /></td>
+<td><input name="techDescriptionTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Спецификация</td>
+<td><input name="specificationPrice" required="" type="text" /></td>
+<td><input name="specificationTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Технологическая карта</td>
+<td><input name="techMapPrice" required="" type="text" /></td>
+<td><input name="techMapTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Раскладка лекал</td>
+<td><input name="layoutPatternPrice" required="" type="text" /></td>
+<td><input name="layoutPatternTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Конфекционная карта</td>
+<td><input name="confessionCardPrice" required="" type="text" /></td>
+<td><input name="confessionCardTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Раскрой</td>
+<td><input name="cutPrice" required="" type="text" /></td>
+<td><input name="cutTime" required="" type="text" /></td>
+</tr>
+<tr>
+<td>Пошив изделия</td>
+<td><input name="tailoringPrice" required="" type="text" /></td>
+<td><input name="tailoringTime" required="" type="text" /></td>
+</tr>
+</tbody>
+</table>
+[inputHiddenIdCard]
+<input type="submit" value="Отправить" />
+
+</form>
+<?php
+return ob_get_clean();
+}
+
 	add_shortcode('inputHiddenIdCard','inputHiddenIdCardFun');
 	add_shortcode('inputHiddenEstimatePost','inputHiddenPostNameEstimate');
+	add_shortcode('formEstimate','formEstimateFun');
 	global $jal_db_version;
 $jal_db_version = "1.0";
 
