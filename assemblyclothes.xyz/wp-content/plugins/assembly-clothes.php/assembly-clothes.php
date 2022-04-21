@@ -9,7 +9,7 @@
  */
 function inputHiddenIdCardFun($attrs){
 	global $post;
-	return "<input type='hidden' name='cardProductId' value='".$post->ID."'/>";
+	return "<input type='hidden' name='cardProductId' value='".$post->ID."'/><input type='hidden' name='action' value='admin_post_estimate_post' />";
 }
 
 function inputHiddenPostNameEstimate($attrs){
