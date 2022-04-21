@@ -1,4 +1,9 @@
 <?php
+	
+add_action('admin_post_estimate_post', 'add_estimate');
+
+
+function add_estimate(){
 	$techPicPrice=trim(iconv_substr(strip_tags($_POST['techPicPrice']), 0, 100));
 	$techPicTime=trim(iconv_substr(strip_tags($_POST['techPicTime']), 0, 100));
 	$patternsBaseSizePrice=trim(iconv_substr(strip_tags($_POST['patternsBaseSizePrice']), 0, 100));
@@ -73,6 +78,7 @@
 
 
 		];
-		$wpdb->insert($wpdb->prefix.'cost_estimate');
+		$wpdb->insert($wpdb->prefix.'cost_estimate',$query);
+	}
 
 ?>
