@@ -154,6 +154,7 @@ function formEstimateFun($attrs){
 </tbody>
 </table>
 <input type='hidden' name='cardProductId' value='<?=$post->ID?>'/>
+<input type="hidden" name="test" value="<?=$post_exist->tailoringTime?>"/>
 <input type="submit" value="Отправить" />
 
 </form>
