@@ -21,7 +21,7 @@ function formEstimateFun($attrs){
 	global $post;
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
-	<input type="hidden" name="action" value="admin_post_estimate_post" />
+	<input type="hidden" name="action" value="estimate_post" />
 <table style="height: 346px;" width="824">
 <tbody>
 <tr>
