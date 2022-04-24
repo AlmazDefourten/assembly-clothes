@@ -26,6 +26,7 @@ function formEstimateFun($attrs){
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
 	<input type="hidden" name="action" value="estimate_post" />
+	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
 <table style="height: 346px;" width="824">
 <tbody>
 <tr>
@@ -95,6 +96,7 @@ function formEstimateFun($attrs){
 		?>
 		<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
 	<input type="hidden" name="action" value="estimate_post" />
+	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
 <table style="height: 346px;" width="824">
 <tbody>
 <tr>
@@ -104,53 +106,53 @@ function formEstimateFun($attrs){
 </tr>
 <tr>
 <td>Технический рисунок</td>
-<td><input name="techPicPrice" required="" type="text" placeholder="<?=$post_exist->techPicPrice?>"/></td>
-<td><input name="techPicTime" required="" type="text" placeholder="<?=$post_exist->techPicTime?>"/></td>
+<td><input name="techPicPrice" required="" type="text" value="<?=$post_exist->techPicPrice?>"/></td>
+<td><input name="techPicTime" required="" type="text" value="<?=$post_exist->techPicTime?>"/></td>
 </tr>
 <tr>
 <td>Лекала на базовый размер</td>
-<td><input name="patternsBaseSizePrice" required="" type="text" placeholder="<?=$post_exist->patternsBaseSizePrice?>"/></td>
-<td><input name="patternsBaseSizeTime" required="" type="text" placeholder="<?=$post_exist->patternsBaseSizeTime?>"/></td>
+<td><input name="patternsBaseSizePrice" required="" type="text" value="<?=$post_exist->patternsBaseSizePrice?>"/></td>
+<td><input name="patternsBaseSizeTime" required="" type="text" value="<?=$post_exist->patternsBaseSizeTime?>"/></td>
 </tr>
 <tr>
 <td>Градация на 1 размер</td>
-<td><input name="gradationPrice" required="" type="text" placeholder="<?=$post_exist->gradationPrice?>"/></td>
-<td><input name="gradationTime" required="" type="text" placeholder="<?=$post_exist->gradationTime?>"/></td>
+<td><input name="gradationPrice" required="" type="text" value="<?=$post_exist->gradationPrice?>"/></td>
+<td><input name="gradationTime" required="" type="text" value="<?=$post_exist->gradationTime?>"/></td>
 </tr>
 <tr>
 <td>Техническое описание модели</td>
-<td><input name="techDescriptionPrice" required="" type="text" placeholder="<?=$post_exist->techDescriptionPrice?>"/></td>
-<td><input name="techDescriptionTime" required="" type="text" placeholder="<?=$post_exist->techDescriptionTime?>"/></td>
+<td><input name="techDescriptionPrice" required="" type="text" value="<?=$post_exist->techDescriptionPrice?>"/></td>
+<td><input name="techDescriptionTime" required="" type="text" value="<?=$post_exist->techDescriptionTime?>"/></td>
 </tr>
 <tr>
 <td>Спецификация</td>
-<td><input name="specificationPrice" required="" type="text" placeholder="<?=$post_exist->specificationPrice?>"/></td>
-<td><input name="specificationTime" required="" type="text" placeholder="<?=$post_exist->specificationTime?>"/></td>
+<td><input name="specificationPrice" required="" type="text" value="<?=$post_exist->specificationPrice?>"/></td>
+<td><input name="specificationTime" required="" type="text" value="<?=$post_exist->specificationTime?>"/></td>
 </tr>
 <tr>
 <td>Технологическая карта</td>
-<td><input name="techMapPrice" required="" type="text" placeholder="<?=$post_exist->techMapPrice?>"/></td>
-<td><input name="techMapTime" required="" type="text" placeholder="<?=$post_exist->techMapTime?>"/></td>
+<td><input name="techMapPrice" required="" type="text" value="<?=$post_exist->techMapPrice?>"/></td>
+<td><input name="techMapTime" required="" type="text" value="<?=$post_exist->techMapTime?>"/></td>
 </tr>
 <tr>
 <td>Раскладка лекал</td>
-<td><input name="layoutPatternPrice" required="" type="text" placeholder="<?=$post_exist->layoutPatternPrice?>"/></td>
-<td><input name="layoutPatternTime" required="" type="text" placeholder="<?=$post_exist->layoutPatternTime?>"/></td>
+<td><input name="layoutPatternPrice" required="" type="text" value="<?=$post_exist->layoutPatternPrice?>"/></td>
+<td><input name="layoutPatternTime" required="" type="text" value="<?=$post_exist->layoutPatternTime?>"/></td>
 </tr>
 <tr>
 <td>Конфекционная карта</td>
-<td><input name="confessionCardPrice" required="" type="text" placeholder="<?=$post_exist->confessionCardPrice?>"/></td>
-<td><input name="confessionCardTime" required="" type="text" placeholder="<?=$post_exist->confessionCardTime?>"/></td>
+<td><input name="confessionCardPrice" required="" type="text" value="<?=$post_exist->confessionCardPrice?>"/></td>
+<td><input name="confessionCardTime" required="" type="text" value="<?=$post_exist->confessionCardTime?>"/></td>
 </tr>
 <tr>
 <td>Раскрой</td>
-<td><input name="cutPrice" required="" type="text" placeholder="<?=$post_exist->cutPrice?>"/></td>
-<td><input name="cutTime" required="" type="text" placeholder="<?=$post_exist->cutTime?>"/></td>
+<td><input name="cutPrice" required="" type="text" value="<?=$post_exist->cutPrice?>"/></td>
+<td><input name="cutTime" required="" type="text" value="<?=$post_exist->cutTime?>"/></td>
 </tr>
 <tr>
 <td>Пошив изделия</td>
-<td><input name="tailoringPrice" required="" type="text" placeholder="<?=$post_exist->tailoringPrice?>"/></td>
-<td><input name="tailoringTime" required="" type="text" placeholder="<?=$post_exist->tailoringTime?>"/></td>
+<td><input name="tailoringPrice" required="" type="text" value="<?=$post_exist->tailoringPrice?>"/></td>
+<td><input name="tailoringTime" required="" type="text" value="<?=$post_exist->tailoringTime?>"/></td>
 </tr>
 </tbody>
 </table>
