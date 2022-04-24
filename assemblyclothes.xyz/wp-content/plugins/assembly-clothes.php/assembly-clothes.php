@@ -148,8 +148,8 @@ function add_estimate(){
 	$tailoringPrice=trim(iconv_substr(strip_tags($_POST['tailoringPrice']), 0, 100));
 	$tailoringTime=trim(iconv_substr(strip_tags($_POST['tailoringTime']), 0, 100));
 	$cardProductId=trim(iconv_substr(strip_tags($_POST['cardProductId']), 0, 100));
-	// $wendorId=get_current_user_id();	
-	$wendorId=1;
+	$wendorId=get_current_user_id();	
+	// $wendorId=1;
 	
 	global $wpdb;
 	$query=[
