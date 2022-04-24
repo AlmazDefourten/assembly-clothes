@@ -21,7 +21,7 @@ function formEstimateFun($attrs){
 	global $post;
 	global $wpdb;
 	$id_user=get_current_user_id();
-	$post_exist=$wpdb->get_row("SELECT * FROM <?=$wpdb->prefix?>cost_estimate WHERE wendorId=$id_user");
+	$post_exist=$wpdb->get_row("SELECT * FROM $wpdb->prefix"."cost_estimate WHERE wendorId=$id_user");
 	if(!$post_exist){
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
