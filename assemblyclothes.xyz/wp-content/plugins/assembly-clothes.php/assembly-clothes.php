@@ -123,8 +123,7 @@ function jal_install () {
 register_activation_hook(__FILE__,'jal_install');
 
 
-add_action('admin_post_nopriv_estimate_post', 'add_estimate');
-add_action('admin_post_estimate_post', 'add_estimate');
+
 
 
 function add_estimate(){
@@ -213,5 +212,6 @@ function add_estimate(){
 		die();
 	}
 
-
+	add_action('admin_post_nopriv_estimate_post', 'add_estimate');
+	add_action('admin_post_estimate_post', 'add_estimate');
 ?>
