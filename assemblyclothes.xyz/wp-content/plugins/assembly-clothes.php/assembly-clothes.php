@@ -208,8 +208,8 @@ function add_estimate(){
 			$redirect = $_POST['redirect'];
 			$redirect = wp_validate_redirect($redirect, home_url());
 		}
-		wp_redirect($redirect);
-		die();
+		// wp_redirect($redirect);
+		// die();
 	}
 
 	add_action('admin_post_nopriv_estimate_post', 'add_estimate');
