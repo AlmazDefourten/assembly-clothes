@@ -203,6 +203,14 @@ function add_estimate(){
 
 		];
 		$wpdb->insert($wpdb->prefix.'cost_estimate',$query,$format);
+
+		$redirect = home_url();
+		if (isset($_POST['redirect'])) {
+			$redirect = $_POST['redirect'];
+			$redirect = wp_validate_redirect($redirect, home_url());
+		}
+		wp_redirect($redirect);
+		die();
 	}
 
 
