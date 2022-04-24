@@ -37,7 +37,7 @@ function formEstimateFun($attrs){
 <tr>
 <td>Лекала на базовый размер</td>
 <td><input name="patternsBaseSizePrice" required="" type="text" /></td>
-<td><input name="patternsBaseSize" required="" type="text" /></td>
+<td><input name="patternsBaseSizeTime" required="" type="text" /></td>
 </tr>
 <tr>
 <td>Градация на 1 размер</td>
