@@ -86,6 +86,7 @@ function formEstimateFun($attrs){
 </tbody>
 </table>
 <input type='hidden' name='cardProductId' value='<?=$post->ID?>'/>
+<input type="hidden" name="getMethod" value="insert"/>
 <input type="submit" value="Отправить" />
 
 </form>
@@ -154,7 +155,7 @@ function formEstimateFun($attrs){
 </tbody>
 </table>
 <input type='hidden' name='cardProductId' value='<?=$post->ID?>'/>
-<input type="hidden" name="test" value="<?=$post_exist->tailoringTime?>"/>
+<input type="hidden" name="getMethod" value="update"/>
 <input type="submit" value="Отправить" />
 
 </form>
@@ -278,7 +279,12 @@ function add_estimate(){
 
 
 		];
-		$wpdb->insert($wpdb->prefix.'cost_estimate',$query,$format);
+		if(trim(iconv_substr(strip_tags($_POST['getMethod']), 0, 100))=="insert"){
+			$wpdb->insert($wpdb->prefix.'cost_estimate',$query,$format);
+		}else{
+			$wpdb->update($wpdb->prefix.'cost_estimate',$query,['wendorId'=>$wendorId]);
+		}
+		
 
 		$redirect = home_url();
 		if (isset($_POST['redirect'])) {
