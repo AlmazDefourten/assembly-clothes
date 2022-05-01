@@ -32,7 +32,7 @@ function formEstimateFun($attrs){
 <tr>
 <th><strong>Услуги</strong></th>
 <th><strong>Стоимость</strong></th>
-<th><strong>Сроки</strong></th>
+<th><strong>Сроки (Сутки)</strong></th>
 </tr>
 <tr>
 <td>Технический рисунок</td>
@@ -172,6 +172,18 @@ return ob_get_clean();
 	add_shortcode('inputHiddenIdCard','inputHiddenIdCardFun');
 	add_shortcode('inputHiddenEstimatePost','inputHiddenPostNameEstimate');
 	add_shortcode('formEstimate','formEstimateFun');
+	add_shortcode('buttonEstimate', 'buttonEstimate');
+	
+
+function buttonEstimate($attrs) {
+    ob_start();
+    if (current_user_can('estimate_crud')) {
+        ?>
+        <div class="wp-block-button"><a class="wp-block-button__link"><span class="popup-trigger popmake-42 " data-popup-id="42" data-do-default="0">Смета затрат</span></a></div>
+        <?php
+    }
+    return ob_get_clean();
+}
 	global $jal_db_version;
 $jal_db_version = "1.0";
 
