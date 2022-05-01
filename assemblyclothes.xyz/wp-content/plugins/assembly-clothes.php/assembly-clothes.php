@@ -102,7 +102,7 @@ function formEstimateFun($attrs){
 <tr>
 <th><strong>Услуги</strong></th>
 <th><strong>Стоимость</strong></th>
-<th><strong>Сроки</strong></th>
+<th><strong>Сроки (Сутки)</strong></th>
 </tr>
 <tr>
 <td>Технический рисунок</td>
