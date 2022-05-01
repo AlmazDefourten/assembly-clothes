@@ -183,6 +183,16 @@ function buttonEstimate($attrs) {
         <?php
     }
     return ob_get_clean();
+
+function listOfVendors($attrs) {
+	   global $wpdb;
+	   $id_user=get_current_user_id();
+	   $card_id = get_the_ID();
+	   $vendors = $wpdp->get_results("SELECT ID, display_name FROM wp_users WHERE ID IN (SELECT wendorId FROM wp_cost_estimate WHERE $card_id=cardProductId)");
+	   foreach ($vendors as $vendor) {
+			echo 'alert('$vendor->display_name')';
+	   }
+}
 }
 	global $jal_db_version;
 $jal_db_version = "1.0";
