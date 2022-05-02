@@ -157,30 +157,41 @@ require get_template_directory() . '/inc/block-patterns.php';
 
 add_action('wp_ajax_getListOfVendors', 'listOfVendors');
 add_action( 'wp_ajax_nopriv_getListOfVendors', 'listOfVendors' ); 
-function listOfVendors() {
-	class Person{
-		public int $sum=0;
-		public int $time=0;
-		public int $cardId;
-		public int $wendorId;
+class Person{
+	public $sum=0;
+	public $time=0;
+	public $cardId;
+	public $wendorId;
 
-		public function setSum(int $sum){
-			$this->sum=$sum;
-		}
-
-		public function setTime(int $time){
-			$this->time=$time;
-		}
-
-		public function setCardId(int $cardId){
-			$this->cardId=$cardId;
-		}
-
-		public function setWendorId(int $wendorId){
-			$this->wendorId=$wendorId;
-		}
-		
+	public function setSum( $sum){
+		$this->sum=$sum;
 	}
+
+	public function setTime( $time){
+		$this->time=$time;
+	}
+
+	public function setCardId( $cardId){
+		$this->cardId=$cardId;
+	}
+
+	public function setWendorId( $wendorId){
+		$this->wendorId=$wendorId;
+	}
+	
+}
+
+function sortObjectSetBy($objectSetForSort, $sortBy){
+
+	usort($objectSetForSort, function($object1,$object2) use ($sortBy){
+						  if($object1->$sortBy == $object2->$sortBy) return 0;
+						  return ($object1->$sortBy > $object2->$sortBy) ? -1 : 1;});
+ 
+	return $objectSetForSort;
+ }
+
+function listOfVendors() {
+	
     $techPic = json_decode($_REQUEST['techPic']);
     $patternsBaseSize = json_decode($_REQUEST['patternsBaseSize']);
     $gradation = json_decode($_REQUEST['gradation']);
@@ -283,9 +294,15 @@ function listOfVendors() {
 		$person->setTime($time);
 		$persons[]=$person;
 	 }
-    foreach($persons as $person){
-		 $response.=$person->sum;
-	 }
+
+
+    $personsPriceSort=sortObjectSetBy($persons,'sum');
+	 $personsTimeSort=sortObjectSetBy($persons,'time');
+	 $personMax=$personsPriceSort[0];
+	 $personMin=$personsPriceSort[count($personsPriceSort)-1];
+	 $personFast=$personsTimeSort[count($personsTimeSort)-1];
+	 $personAvg=$personsPriceSort[intdiv(count($personsPriceSort),2)];
+	 
 	 
 
    //  $avgsum_results = $wpdb->get_results("SELECT AVG(techPicPrice) as techPicPriceAvg,
@@ -408,37 +425,44 @@ function listOfVendors() {
 	// 		$maxsum += $result->tailoringPricemax; $maxtime += $result->tailoringTimemax;
    //      }
    //  }
-//     $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime
-// 	 <table>
-//   <tr>
-//     <th>Тип заказчика</th>
-//     <th>Стоимость услуги</th>
-//     <th>Сроки</th>
-//   </tr>
-//   <tr>
-//     <td>Самый дешевый</td>
-//     <td>$minsum</td>
-//     <td>$maxtime</td>
-//   </tr>
-//   <tr>
-//     <td>Самый дорогой</td>
-// 	 <td>$maxsum</td>
-//     <td>$avgtime</td>
-//   </tr>
-//   <tr>
-//     <td>Самый быстрый</td>
-//     <td>$avgsum</td>
-// 	 <td>$mintime</td>
-//   </tr>
-//   <tr>
-//     <td>Средний</td>
-//     <td>$avgsum</td>
-//     <td>$avgtime</td>
-//   </tr>
-  
-// </table>
 
-// 	 ";
+	// $personMax=$personsPriceSort[0];
+	// $personMin=$personsPriceSort[count($personsPriceSort)-1];
+	// $personFast=$personsTimeSort[count($personsTimeSort)-1];
+	// $personAvg=$personsPriceSort[intdiv(count($personsPriceSort),2)];
+
+	// $response="$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime";
+    $response .= "
+	 <table>
+  <tr>
+    <th>Тип заказчика</th>
+    <th>Стоимость услуги</th>
+    <th>Сроки</th>
+  </tr>
+  <tr>
+    <td>Самый дешевый</td>
+    <td>$personMin->sum</td>
+    <td>$personMin->time</td>
+  </tr>
+  <tr>
+    <td>Самый дорогой</td>
+	 <td>$personMax->sum</td>
+    <td>$personMax->time</td>
+  </tr>
+  <tr>
+    <td>Самый быстрый</td>
+    <td>$personFast->sum</td>
+    <td>$personFast->time</td>
+  </tr>
+  <tr>
+    <td>Средний</td>
+    <td>$personAvg->sum</td>
+    <td>$personAvg->time</td>
+  </tr>
+  
+</table>
+
+	 ";
     echo $response;
     wp_die();
 }
