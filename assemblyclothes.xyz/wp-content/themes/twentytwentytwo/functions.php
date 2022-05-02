@@ -433,7 +433,7 @@ function listOfVendors() {
 
 	// $response="$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime";
     $response .= "
-	 <table>
+	 <table style='text-align: center;    border: 1px solid;'>
   <tr>
     <th>Тип заказчика</th>
     <th>Стоимость услуги</th>
