@@ -329,7 +329,37 @@ function listOfVendors() {
 			$maxsum += $result->tailoringPricemax; $maxtime += $result->tailoringTimemax;
         }
     }
-    $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime";
+    $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime
+	 <table>
+  <tr>
+    <th>Тип заказчика</th>
+    <th>Стоимость услуги</th>
+    <th>Сроки</th>
+  </tr>
+  <tr>
+    <td>Самый дешевый</td>
+    <td>$minsum</td>
+    <td>$maxtime</td>
+  </tr>
+  <tr>
+    <td>Самый дорогой</td>
+	 <td>$maxsum</td>
+    <td>$avgtime</td>
+  </tr>
+  <tr>
+    <td>Самый быстрый</td>
+    <td>$avgsum</td>
+	 <td>$mintime</td>
+  </tr>
+  <tr>
+    <td>Средний</td>
+    <td>$avgsum</td>
+    <td>$avgtime</td>
+  </tr>
+  
+</table>
+
+	 ";
     echo $response;
     wp_die();
 }
