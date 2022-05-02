@@ -41,52 +41,52 @@ function formEstimateFun($attrs){
 </tr>
 <tr>
 <td>Технический рисунок</td>
-<td><input name="techPicPrice" required="" type="text" /></td>
+<td><input name="techPicPrice" required="" type="number" /></td>
 <td><input name="techPicTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Лекала на базовый размер</td>
-<td><input name="patternsBaseSizePrice" required="" type="text" /></td>
+<td><input name="patternsBaseSizePrice" required="" type="number" /></td>
 <td><input name="patternsBaseSizeTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Градация на 1 размер</td>
-<td><input name="gradationPrice" required="" type="text" /></td>
+<td><input name="gradationPrice" required="" type="number" /></td>
 <td><input name="gradationTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Техническое описание модели</td>
-<td><input name="techDescriptionPrice" required="" type="text" /></td>
+<td><input name="techDescriptionPrice" required="" type="number" /></td>
 <td><input name="techDescriptionTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Спецификация</td>
-<td><input name="specificationPrice" required="" type="text" /></td>
+<td><input name="specificationPrice" required="" type="number" /></td>
 <td><input name="specificationTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Технологическая карта</td>
-<td><input name="techMapPrice" required="" type="text" /></td>
+<td><input name="techMapPrice" required="" type="number" /></td>
 <td><input name="techMapTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Раскладка лекал</td>
-<td><input name="layoutPatternPrice" required="" type="text" /></td>
+<td><input name="layoutPatternPrice" required="" type="number" /></td>
 <td><input name="layoutPatternTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Конфекционная карта</td>
-<td><input name="confessionCardPrice" required="" type="text" /></td>
+<td><input name="confessionCardPrice" required="" type="number" /></td>
 <td><input name="confessionCardTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Раскрой</td>
-<td><input name="cutPrice" required="" type="text" /></td>
+<td><input name="cutPrice" required="" type="number" /></td>
 <td><input name="cutTime" required="" type="number" /></td>
 </tr>
 <tr>
 <td>Пошив изделия</td>
-<td><input name="tailoringPrice" required="" type="text" /></td>
+<td><input name="tailoringPrice" required="" type="number" /></td>
 <td><input name="tailoringTime" required="" type="number" /></td>
 </tr>
 </tbody>
@@ -111,52 +111,52 @@ function formEstimateFun($attrs){
 </tr>
 <tr>
 <td>Технический рисунок</td>
-<td><input name="techPicPrice" required="" type="text" value="<?=$post_exist->techPicPrice?>"/></td>
+<td><input name="techPicPrice" required="" type="number" value="<?=$post_exist->techPicPrice?>"/></td>
 <td><input name="techPicTime" required="" type="number" value="<?=$post_exist->techPicTime?>"/></td>
 </tr>
 <tr>
 <td>Лекала на базовый размер</td>
-<td><input name="patternsBaseSizePrice" required="" type="text" value="<?=$post_exist->patternsBaseSizePrice?>"/></td>
+<td><input name="patternsBaseSizePrice" required="" type="number" value="<?=$post_exist->patternsBaseSizePrice?>"/></td>
 <td><input name="patternsBaseSizeTime" required="" type="number" value="<?=$post_exist->patternsBaseSizeTime?>"/></td>
 </tr>
 <tr>
 <td>Градация на 1 размер</td>
-<td><input name="gradationPrice" required="" type="text" value="<?=$post_exist->gradationPrice?>"/></td>
+<td><input name="gradationPrice" required="" type="number" value="<?=$post_exist->gradationPrice?>"/></td>
 <td><input name="gradationTime" required="" type="number" value="<?=$post_exist->gradationTime?>"/></td>
 </tr>
 <tr>
 <td>Техническое описание модели</td>
-<td><input name="techDescriptionPrice" required="" type="text" value="<?=$post_exist->techDescriptionPrice?>"/></td>
+<td><input name="techDescriptionPrice" required="" type="number" value="<?=$post_exist->techDescriptionPrice?>"/></td>
 <td><input name="techDescriptionTime" required="" type="number" value="<?=$post_exist->techDescriptionTime?>"/></td>
 </tr>
 <tr>
 <td>Спецификация</td>
-<td><input name="specificationPrice" required="" type="text" value="<?=$post_exist->specificationPrice?>"/></td>
+<td><input name="specificationPrice" required="" type="number" value="<?=$post_exist->specificationPrice?>"/></td>
 <td><input name="specificationTime" required="" type="number" value="<?=$post_exist->specificationTime?>"/></td>
 </tr>
 <tr>
 <td>Технологическая карта</td>
-<td><input name="techMapPrice" required="" type="text" value="<?=$post_exist->techMapPrice?>"/></td>
+<td><input name="techMapPrice" required="" type="number" value="<?=$post_exist->techMapPrice?>"/></td>
 <td><input name="techMapTime" required="" type="number" value="<?=$post_exist->techMapTime?>"/></td>
 </tr>
 <tr>
 <td>Раскладка лекал</td>
-<td><input name="layoutPatternPrice" required="" type="text" value="<?=$post_exist->layoutPatternPrice?>"/></td>
+<td><input name="layoutPatternPrice" required="" type="number" value="<?=$post_exist->layoutPatternPrice?>"/></td>
 <td><input name="layoutPatternTime" required="" type="number" value="<?=$post_exist->layoutPatternTime?>"/></td>
 </tr>
 <tr>
 <td>Конфекционная карта</td>
-<td><input name="confessionCardPrice" required="" type="text" value="<?=$post_exist->confessionCardPrice?>"/></td>
+<td><input name="confessionCardPrice" required="" type="number" value="<?=$post_exist->confessionCardPrice?>"/></td>
 <td><input name="confessionCardTime" required="" type="number" value="<?=$post_exist->confessionCardTime?>"/></td>
 </tr>
 <tr>
 <td>Раскрой</td>
-<td><input name="cutPrice" required="" type="text" value="<?=$post_exist->cutPrice?>"/></td>
+<td><input name="cutPrice" required="" type="number" value="<?=$post_exist->cutPrice?>"/></td>
 <td><input name="cutTime" required="" type="number" value="<?=$post_exist->cutTime?>"/></td>
 </tr>
 <tr>
 <td>Пошив изделия</td>
-<td><input name="tailoringPrice" required="" type="text" value="<?=$post_exist->tailoringPrice?>"/></td>
+<td><input name="tailoringPrice" required="" type="number" value="<?=$post_exist->tailoringPrice?>"/></td>
 <td><input name="tailoringTime" required="" type="number" value="<?=$post_exist->tailoringTime?>"/></td>
 </tr>
 </tbody>
