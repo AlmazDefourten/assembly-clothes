@@ -12,6 +12,11 @@ function inputHiddenIdCardFun($attrs){
 	return "<input type='hidden' name='cardProductId' value='".$post->ID."'/>";
 }
 
+function idCardFun($attrs){
+	global $post;
+	return $post->ID;
+}
+
 function inputHiddenPostNameEstimate($attrs){
 	return '<input type="hidden" name="action" value="admin_post_estimate_post" />';
 }
@@ -173,6 +178,7 @@ return ob_get_clean();
 	add_shortcode('inputHiddenEstimatePost','inputHiddenPostNameEstimate');
 	add_shortcode('formEstimate','formEstimateFun');
 	add_shortcode('buttonEstimate', 'buttonEstimate');
+	add_shortcode('idCard','idCardFun');
 	
 
 function buttonEstimate($attrs) {
