@@ -146,6 +146,190 @@ if ( ! function_exists( 'twentytwentytwo_preload_webfonts' ) ) :
 endif;
 
 add_action( 'wp_head', 'twentytwentytwo_preload_webfonts' );
+add_action( 'wp_enqueue_scripts', 'truemisha_jquery' );
+ 
+function truemisha_jquery() {
+	wp_enqueue_script( 'jquery' );
+}
 
 // Add block patterns
 require get_template_directory() . '/inc/block-patterns.php';
+
+add_action('wp_ajax_getListOfVendors', 'listOfVendors');
+add_action( 'wp_ajax_nopriv_getListOfVendors', 'listOfVendors' ); 
+function listOfVendors() {
+    $techPic = json_decode($_REQUEST['techPic']);
+    $patternsBaseSize = json_decode($_REQUEST['patternsBaseSize']);
+    $gradation = json_decode($_REQUEST['gradation']);
+    $techDescription = json_decode($_REQUEST['techDescription']);
+    $specification = json_decode($_REQUEST['specification']);
+    $techMap = json_decode($_REQUEST['techMap']);
+    $layoutPattern = json_decode($_REQUEST['layoutPattern']);
+    $confessionCard = json_decode($_REQUEST['confessionCard']);
+    $cut = json_decode($_REQUEST['cut']);
+    $tailoring = json_decode($_REQUEST['tailoring']);
+    
+    $response = "<p>";
+    global $wpdb;
+    global $post;
+    $card_id = json_decode($_REQUEST['cardId']);
+    $id_user=get_current_user_id();
+    $sql = "SELECT ";
+    if ($techPic == 1) {
+       $sql .= "techPicPrice, techPicTime ";
+    }
+    if ($patternsBaseSize == 1) {
+        $sql .= " patternsBaseSizePrice, patternsBaseSizeTime";
+    }
+    if ($gradation == 1) {
+        $sql .= " gradationPrice, gradationTime";
+    }
+    if ($techDescription == 1) {
+        $sql .= " techDescriptionPrice, techDescriptionTime";
+    }
+    if ($specification == 1) {
+        $sql .= " specificationPrice, specificationTime";
+    }
+    if ($techMap == 1) {
+        $sql .= " techMapPrice, techMapTime";
+    }
+    if ($layoutPattern == 1) {
+        $sql .= " layoutPatternPrice, layoutPatternTime";
+    }
+    if ($confessionCard == 1) {
+        $sql .= " confessionCardPrice, confessionCardTime";
+    }
+    if ($cut == 1) {
+        $sql .= " cutPrice, cutTime";
+    }
+    if ($tailoring == 1) {
+        $sql .= " tailoringPrice, tailoringTime";
+    }
+    $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
+    
+    $results = $wpdb->get_results($sql);
+    
+    $avgsum_results = $wpdb->get_results("SELECT AVG(techPicPrice) as techPicPriceAvg,
+    AVG(techPicTime) as techPicTimeAvg,
+    AVG(patternsBaseSizePrice) as patternsBaseSizePriceAvg,
+    AVG(patternsBaseSizeTime) as patternsBaseSizeTimeAvg,
+    AVG(gradationPrice) as gradationPriceAvg,
+    AVG(gradationTime) as gradationTimeAvg,
+    AVG(techDescriptionPrice) as techDescriptionPriceAvg,
+    AVG(techDescriptionTime) as techDescriptionTimeAvg,
+    AVG(specificationPrice) as specificationPriceAvg,
+    AVG(specificationTime) as specificationTimeAvg,
+    AVG(techMapPrice) as techMapPriceAvg,
+    AVG(techMapTime) as techMapTimeAvg,
+    AVG(layoutPatternPrice) as layoutPatternPriceAvg,
+    AVG(layoutPatternTime) as layoutPatternTimeAvg,
+    AVG(confessionCardPrice) as confessionCardPriceAvg,
+    AVG(confessionCardTime) as confessionCardTimeAvg,
+    AVG(cutPrice) as cutPriceAvg,
+    AVG(cutTime) as cutTimeAvg,
+    AVG(tailoringPrice) as tailoringPriceAvg,
+    AVG(tailoringTime) as tailoringTimeAvg,
+    min(techPicPrice) as techPicPricemin,
+    min(techPicTime) as techPicTimemin,
+    min(patternsBaseSizePrice) as patternsBaseSizePricemin,
+    min(patternsBaseSizeTime) as patternsBaseSizeTimemin,
+    min(gradationPrice) as gradationPricemin,
+    min(gradationTime) as gradationTimemin,
+    min(techDescriptionPrice) as techDescriptionPricemin,
+    min(techDescriptionTime) as techDescriptionTimemin,
+    min(specificationPrice) as specificationPricemin,
+    min(specificationTime) as specificationTimemin,
+    min(techMapPrice) as techMapPricemin,
+    min(techMapTime) as techMapTimemin,
+    min(layoutPatternPrice) as layoutPatternPricemin,
+    min(layoutPatternTime) as layoutPatternTimemin,
+    min(confessionCardPrice) as confessionCardPricemin,
+    min(confessionCardTime) as confessionCardTimemin,
+    min(cutPrice) as cutPricemin,
+    min(cutTime) as cutTimemin,
+    min(tailoringPrice) as tailoringPricemin,
+    min(tailoringTime) as tailoringTimemin,
+    max(techPicPrice) as techPicPricemax,
+    max(techPicTime) as techPicTimemax,
+    max(patternsBaseSizePrice) as patternsBaseSizePricemax,
+    max(patternsBaseSizeTime) as patternsBaseSizeTimemax,
+    max(gradationPrice) as gradationPricemax,
+    max(gradationTime) as gradationTimemax,
+    max(techDescriptionPrice) as techDescriptionPricemax,
+    max(techDescriptionTime) as techDescriptionTimemax,
+    max(specificationPrice) as specificationPricemax,
+    max(specificationTime) as specificationTimemax,
+    max(techMapPrice) as techMapPricemax,
+    max(techMapTime) as techMapTimemax,
+    max(layoutPatternPrice) as layoutPatternPricemax,
+    max(layoutPatternTime) as layoutPatternTimemax,
+    max(confessionCardPrice) as confessionCardPricemax,
+    max(confessionCardTime) as confessionCardTimemax,
+    max(cutPrice) as cutPricemax,
+    max(cutTime) as cutTimemax,
+    max(tailoringPrice) as tailoringPricemax,
+    max(tailoringTime) as tailoringTimemax
+    FROM wp_cost_estimate WHERE cardProductId=$card_id
+        ");
+    $avgtime = 0;
+    $avgsum = 0;
+    $minsum = 0;
+    $mintime = 0;
+    $maxsum = 0;
+    $maxtime = 0;
+    foreach($avgsum_results as $result) {
+        if ($techPic == 1) {
+           $avgsum += $result->techPicPriceAvg; $avgtime += $result->techPicTimeAvg;
+		   $minsum += $result->techPicPricemin; $mintime += $result->techPicTimemin;
+		   $maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
+        }
+        if ($patternsBaseSize == 1) {
+            $avgsum += $result->patternsBaseSizePriceAvg; $avgtime += $result->patternsBaseSizeTimeAvg;
+			$minsum += $result->patternsBaseSizePricemin; $mintime += $result->patternsBaseSizeTimemin;
+			$maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
+        }
+        if ($gradation == 1) {
+            $avgsum += $result->gradationPriceAvg; $avgtime += $result->gradationTimeAvg;
+			$minsum += $result->gradationPricemin; $mintime += $result->gradationTimemin;
+			$maxsum += $result->gradationPricemax; $maxtime += $result->gradationTimemax;
+        }
+        if ($techDescription == 1) {
+            $avgsum += $result->techDescriptionPriceAvg; $avgtime += $result->techDescriptionTimeAvg;
+			$minsum += $result->techDescriptionPricemin; $mintime += $result->techDescriptionTimemin;
+			$maxsum += $result->techDescriptionPricemax; $maxtime += $result->techDescriptionTimemax;
+        }
+        if ($specification == 1) {
+            $avgsum += $result->specificationPriceAvg; $avgtime += $result->specificationTimeAvg;
+			$minsum += $result->specificationPricemin; $mintime += $result->specificationTimemin;
+			$maxsum += $result->specificationPricemax; $maxtime += $result->specificationTimemax;
+        }
+        if ($techMap == 1) {
+            $avgsum += $result->techMapPriceAvg; $avgtime += $result->techMapTimeAvg;
+			$minsum += $result->techMapPricemin; $mintime += $result->techMapTimemin;
+			$maxsum += $result->techMapPricemax; $maxtime += $result->techMapTimemax;
+        }
+        if ($layoutPattern == 1) {
+            $avgsum += $result->layoutPatternPriceAvg; $avgtime += $result->layoutPatternTimeAvg;
+			$minsum += $result->layoutPatternPricemin; $mintime += $result->layoutPatternTimemin;
+			$maxsum += $result->layoutPatternPricemax; $maxtime += $result->layoutPatternTimemax;
+        }
+        if ($confessionCard == 1) {
+            $avgsum += $result->confessionCardPriceAvg; $avgtime += $result->confessionCardTimeAvg;
+			$minsum += $result->confessionCardPricemin; $mintime += $result->confessionCardTimemin;
+			$maxsum += $result->confessionCardPricemax; $maxtime += $result->confessionCardTimemax;
+        }
+        if ($cut == 1) {
+            $avgsum += $result->cutPriceAvg; $avgtime += $result->cutTimeAvg;
+			$minsum += $result->cutPricemin; $mintime += $result->cutTimemin;
+			$maxsum += $result->cutPricemax; $maxtime += $result->cutTimemax;
+        }
+        if ($tailoring == 1) {
+            $avgsum += $result->tailoringPriceAvg; $avgtime += $result->tailoringTimeAvg;
+			$minsum += $result->tailoringPricemin; $mintime += $result->tailoringTimemin;
+			$maxsum += $result->tailoringPricemax; $maxtime += $result->tailoringTimemax;
+        }
+    }
+    $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime";
+    echo $response;
+    wp_die();
+}
