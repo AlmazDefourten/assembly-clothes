@@ -158,6 +158,29 @@ require get_template_directory() . '/inc/block-patterns.php';
 add_action('wp_ajax_getListOfVendors', 'listOfVendors');
 add_action( 'wp_ajax_nopriv_getListOfVendors', 'listOfVendors' ); 
 function listOfVendors() {
+	class Person{
+		public int $sum=0;
+		public int $time=0;
+		public int $cardId;
+		public int $wendorId;
+
+		public function setSum(int $sum){
+			$this->sum=$sum;
+		}
+
+		public function setTime(int $time){
+			$this->time=$time;
+		}
+
+		public function setCardId(int $cardId){
+			$this->cardId=$cardId;
+		}
+
+		public function setWendorId(int $wendorId){
+			$this->wendorId=$wendorId;
+		}
+		
+	}
     $techPic = json_decode($_REQUEST['techPic']);
     $patternsBaseSize = json_decode($_REQUEST['patternsBaseSize']);
     $gradation = json_decode($_REQUEST['gradation']);
@@ -208,158 +231,214 @@ function listOfVendors() {
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
     
     $results = $wpdb->get_results($sql);
-    
-    $avgsum_results = $wpdb->get_results("SELECT AVG(techPicPrice) as techPicPriceAvg,
-    AVG(techPicTime) as techPicTimeAvg,
-    AVG(patternsBaseSizePrice) as patternsBaseSizePriceAvg,
-    AVG(patternsBaseSizeTime) as patternsBaseSizeTimeAvg,
-    AVG(gradationPrice) as gradationPriceAvg,
-    AVG(gradationTime) as gradationTimeAvg,
-    AVG(techDescriptionPrice) as techDescriptionPriceAvg,
-    AVG(techDescriptionTime) as techDescriptionTimeAvg,
-    AVG(specificationPrice) as specificationPriceAvg,
-    AVG(specificationTime) as specificationTimeAvg,
-    AVG(techMapPrice) as techMapPriceAvg,
-    AVG(techMapTime) as techMapTimeAvg,
-    AVG(layoutPatternPrice) as layoutPatternPriceAvg,
-    AVG(layoutPatternTime) as layoutPatternTimeAvg,
-    AVG(confessionCardPrice) as confessionCardPriceAvg,
-    AVG(confessionCardTime) as confessionCardTimeAvg,
-    AVG(cutPrice) as cutPriceAvg,
-    AVG(cutTime) as cutTimeAvg,
-    AVG(tailoringPrice) as tailoringPriceAvg,
-    AVG(tailoringTime) as tailoringTimeAvg,
-    min(techPicPrice) as techPicPricemin,
-    min(techPicTime) as techPicTimemin,
-    min(patternsBaseSizePrice) as patternsBaseSizePricemin,
-    min(patternsBaseSizeTime) as patternsBaseSizeTimemin,
-    min(gradationPrice) as gradationPricemin,
-    min(gradationTime) as gradationTimemin,
-    min(techDescriptionPrice) as techDescriptionPricemin,
-    min(techDescriptionTime) as techDescriptionTimemin,
-    min(specificationPrice) as specificationPricemin,
-    min(specificationTime) as specificationTimemin,
-    min(techMapPrice) as techMapPricemin,
-    min(techMapTime) as techMapTimemin,
-    min(layoutPatternPrice) as layoutPatternPricemin,
-    min(layoutPatternTime) as layoutPatternTimemin,
-    min(confessionCardPrice) as confessionCardPricemin,
-    min(confessionCardTime) as confessionCardTimemin,
-    min(cutPrice) as cutPricemin,
-    min(cutTime) as cutTimemin,
-    min(tailoringPrice) as tailoringPricemin,
-    min(tailoringTime) as tailoringTimemin,
-    max(techPicPrice) as techPicPricemax,
-    max(techPicTime) as techPicTimemax,
-    max(patternsBaseSizePrice) as patternsBaseSizePricemax,
-    max(patternsBaseSizeTime) as patternsBaseSizeTimemax,
-    max(gradationPrice) as gradationPricemax,
-    max(gradationTime) as gradationTimemax,
-    max(techDescriptionPrice) as techDescriptionPricemax,
-    max(techDescriptionTime) as techDescriptionTimemax,
-    max(specificationPrice) as specificationPricemax,
-    max(specificationTime) as specificationTimemax,
-    max(techMapPrice) as techMapPricemax,
-    max(techMapTime) as techMapTimemax,
-    max(layoutPatternPrice) as layoutPatternPricemax,
-    max(layoutPatternTime) as layoutPatternTimemax,
-    max(confessionCardPrice) as confessionCardPricemax,
-    max(confessionCardTime) as confessionCardTimemax,
-    max(cutPrice) as cutPricemax,
-    max(cutTime) as cutTimemax,
-    max(tailoringPrice) as tailoringPricemax,
-    max(tailoringTime) as tailoringTimemax
-    FROM wp_cost_estimate WHERE cardProductId=$card_id
-        ");
-    $avgtime = 0;
-    $avgsum = 0;
-    $minsum = 0;
-    $mintime = 0;
-    $maxsum = 0;
-    $maxtime = 0;
-    foreach($avgsum_results as $result) {
-        if ($techPic == 1) {
-           $avgsum += $result->techPicPriceAvg; $avgtime += $result->techPicTimeAvg;
-		   $minsum += $result->techPicPricemin; $mintime += $result->techPicTimemin;
-		   $maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
-        }
-        if ($patternsBaseSize == 1) {
-            $avgsum += $result->patternsBaseSizePriceAvg; $avgtime += $result->patternsBaseSizeTimeAvg;
-			$minsum += $result->patternsBaseSizePricemin; $mintime += $result->patternsBaseSizeTimemin;
-			$maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
-        }
-        if ($gradation == 1) {
-            $avgsum += $result->gradationPriceAvg; $avgtime += $result->gradationTimeAvg;
-			$minsum += $result->gradationPricemin; $mintime += $result->gradationTimemin;
-			$maxsum += $result->gradationPricemax; $maxtime += $result->gradationTimemax;
-        }
-        if ($techDescription == 1) {
-            $avgsum += $result->techDescriptionPriceAvg; $avgtime += $result->techDescriptionTimeAvg;
-			$minsum += $result->techDescriptionPricemin; $mintime += $result->techDescriptionTimemin;
-			$maxsum += $result->techDescriptionPricemax; $maxtime += $result->techDescriptionTimemax;
-        }
-        if ($specification == 1) {
-            $avgsum += $result->specificationPriceAvg; $avgtime += $result->specificationTimeAvg;
-			$minsum += $result->specificationPricemin; $mintime += $result->specificationTimemin;
-			$maxsum += $result->specificationPricemax; $maxtime += $result->specificationTimemax;
-        }
-        if ($techMap == 1) {
-            $avgsum += $result->techMapPriceAvg; $avgtime += $result->techMapTimeAvg;
-			$minsum += $result->techMapPricemin; $mintime += $result->techMapTimemin;
-			$maxsum += $result->techMapPricemax; $maxtime += $result->techMapTimemax;
-        }
-        if ($layoutPattern == 1) {
-            $avgsum += $result->layoutPatternPriceAvg; $avgtime += $result->layoutPatternTimeAvg;
-			$minsum += $result->layoutPatternPricemin; $mintime += $result->layoutPatternTimemin;
-			$maxsum += $result->layoutPatternPricemax; $maxtime += $result->layoutPatternTimemax;
-        }
-        if ($confessionCard == 1) {
-            $avgsum += $result->confessionCardPriceAvg; $avgtime += $result->confessionCardTimeAvg;
-			$minsum += $result->confessionCardPricemin; $mintime += $result->confessionCardTimemin;
-			$maxsum += $result->confessionCardPricemax; $maxtime += $result->confessionCardTimemax;
-        }
-        if ($cut == 1) {
-            $avgsum += $result->cutPriceAvg; $avgtime += $result->cutTimeAvg;
-			$minsum += $result->cutPricemin; $mintime += $result->cutTimemin;
-			$maxsum += $result->cutPricemax; $maxtime += $result->cutTimemax;
-        }
-        if ($tailoring == 1) {
-            $avgsum += $result->tailoringPriceAvg; $avgtime += $result->tailoringTimeAvg;
-			$minsum += $result->tailoringPricemin; $mintime += $result->tailoringTimemin;
-			$maxsum += $result->tailoringPricemax; $maxtime += $result->tailoringTimemax;
-        }
-    }
-    $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime
-	 <table>
-  <tr>
-    <th>Тип заказчика</th>
-    <th>Стоимость услуги</th>
-    <th>Сроки</th>
-  </tr>
-  <tr>
-    <td>Самый дешевый</td>
-    <td>$minsum</td>
-    <td>$maxtime</td>
-  </tr>
-  <tr>
-    <td>Самый дорогой</td>
-	 <td>$maxsum</td>
-    <td>$avgtime</td>
-  </tr>
-  <tr>
-    <td>Самый быстрый</td>
-    <td>$avgsum</td>
-	 <td>$mintime</td>
-  </tr>
-  <tr>
-    <td>Средний</td>
-    <td>$avgsum</td>
-    <td>$avgtime</td>
-  </tr>
-  
-</table>
 
-	 ";
+	 $persons=[];
+	 foreach($results as $result){
+		 $sum=0;
+		 $time=0;
+		if ($techPic == 1) {
+			$sum+=$result->techPicPrice;
+			$time+=$result->techPicTime;
+		}
+		if ($patternsBaseSize == 1) {
+			$sum+=$result->patternsBaseSizePrice;
+			$time+=$result->patternsBaseSizeTime;
+		}
+		if ($gradation == 1) {
+			$sum+=$result->gradationPrice;
+			$time+=$result->gradationTime;
+		}
+		if ($techDescription == 1) {
+			$sum+=$result->techDescriptionPrice;
+			$time+=$result->techDescriptionTime;
+		}
+		if ($specification == 1) {
+			$sum+=$result->specificationPrice;
+			$time+=$result->specificationTime;
+		}
+		if ($techMap == 1) {
+			$sum+=$result->techMapPrice;
+			$time+=$result->techMapTime;
+		}
+		if ($layoutPattern == 1) {
+			$sum+=$result->layoutPatternPrice;
+			$time+=$result->layoutPatternTime;
+		}
+		if ($confessionCard == 1) {
+			$sum+=$result->confessionCardPrice;
+			$time+=$result->confessionCardTime;
+		}
+		if ($cut == 1) {
+			$sum+=$result->cutPrice;
+			$time+=$result->cutTime;
+		}
+		if ($tailoring == 1) {
+			$sum+=$result->tailoringPrice;
+			$time+=$result->tailoringTime;
+		}
+		$person=new Person();
+		$person->setCardId($result->cardId);
+		$person->setWendorId($result->wendorId);
+		$person->setSum($sum);
+		$person->setTime($time);
+		$persons[]=$person;
+	 }
+    foreach($persons as $person){
+		 $response.=$person->sum;
+	 }
+	 
+
+   //  $avgsum_results = $wpdb->get_results("SELECT AVG(techPicPrice) as techPicPriceAvg,
+   //  AVG(techPicTime) as techPicTimeAvg,
+   //  AVG(patternsBaseSizePrice) as patternsBaseSizePriceAvg,
+   //  AVG(patternsBaseSizeTime) as patternsBaseSizeTimeAvg,
+   //  AVG(gradationPrice) as gradationPriceAvg,
+   //  AVG(gradationTime) as gradationTimeAvg,
+   //  AVG(techDescriptionPrice) as techDescriptionPriceAvg,
+   //  AVG(techDescriptionTime) as techDescriptionTimeAvg,
+   //  AVG(specificationPrice) as specificationPriceAvg,
+   //  AVG(specificationTime) as specificationTimeAvg,
+   //  AVG(techMapPrice) as techMapPriceAvg,
+   //  AVG(techMapTime) as techMapTimeAvg,
+   //  AVG(layoutPatternPrice) as layoutPatternPriceAvg,
+   //  AVG(layoutPatternTime) as layoutPatternTimeAvg,
+   //  AVG(confessionCardPrice) as confessionCardPriceAvg,
+   //  AVG(confessionCardTime) as confessionCardTimeAvg,
+   //  AVG(cutPrice) as cutPriceAvg,
+   //  AVG(cutTime) as cutTimeAvg,
+   //  AVG(tailoringPrice) as tailoringPriceAvg,
+   //  AVG(tailoringTime) as tailoringTimeAvg,
+   //  min(techPicPrice) as techPicPricemin,
+   //  min(techPicTime) as techPicTimemin,
+   //  min(patternsBaseSizePrice) as patternsBaseSizePricemin,
+   //  min(patternsBaseSizeTime) as patternsBaseSizeTimemin,
+   //  min(gradationPrice) as gradationPricemin,
+   //  min(gradationTime) as gradationTimemin,
+   //  min(techDescriptionPrice) as techDescriptionPricemin,
+   //  min(techDescriptionTime) as techDescriptionTimemin,
+   //  min(specificationPrice) as specificationPricemin,
+   //  min(specificationTime) as specificationTimemin,
+   //  min(techMapPrice) as techMapPricemin,
+   //  min(techMapTime) as techMapTimemin,
+   //  min(layoutPatternPrice) as layoutPatternPricemin,
+   //  min(layoutPatternTime) as layoutPatternTimemin,
+   //  min(confessionCardPrice) as confessionCardPricemin,
+   //  min(confessionCardTime) as confessionCardTimemin,
+   //  min(cutPrice) as cutPricemin,
+   //  min(cutTime) as cutTimemin,
+   //  min(tailoringPrice) as tailoringPricemin,
+   //  min(tailoringTime) as tailoringTimemin,
+   //  max(techPicPrice) as techPicPricemax,
+   //  max(techPicTime) as techPicTimemax,
+   //  max(patternsBaseSizePrice) as patternsBaseSizePricemax,
+   //  max(patternsBaseSizeTime) as patternsBaseSizeTimemax,
+   //  max(gradationPrice) as gradationPricemax,
+   //  max(gradationTime) as gradationTimemax,
+   //  max(techDescriptionPrice) as techDescriptionPricemax,
+   //  max(techDescriptionTime) as techDescriptionTimemax,
+   //  max(specificationPrice) as specificationPricemax,
+   //  max(specificationTime) as specificationTimemax,
+   //  max(techMapPrice) as techMapPricemax,
+   //  max(techMapTime) as techMapTimemax,
+   //  max(layoutPatternPrice) as layoutPatternPricemax,
+   //  max(layoutPatternTime) as layoutPatternTimemax,
+   //  max(confessionCardPrice) as confessionCardPricemax,
+   //  max(confessionCardTime) as confessionCardTimemax,
+   //  max(cutPrice) as cutPricemax,
+   //  max(cutTime) as cutTimemax,
+   //  max(tailoringPrice) as tailoringPricemax,
+   //  max(tailoringTime) as tailoringTimemax
+   //  FROM wp_cost_estimate WHERE cardProductId=$card_id
+   //      ");
+   //  $avgtime = 0;
+   //  $avgsum = 0;
+   //  $minsum = 0;
+   //  $mintime = 0;
+   //  $maxsum = 0;
+   //  $maxtime = 0;
+   //  foreach($avgsum_results as $result) {
+   //      if ($techPic == 1) {
+   //         $avgsum += $result->techPicPriceAvg; $avgtime += $result->techPicTimeAvg;
+	// 	   $minsum += $result->techPicPricemin; $mintime += $result->techPicTimemin;
+	// 	   $maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
+   //      }
+   //      if ($patternsBaseSize == 1) {
+   //          $avgsum += $result->patternsBaseSizePriceAvg; $avgtime += $result->patternsBaseSizeTimeAvg;
+	// 		$minsum += $result->patternsBaseSizePricemin; $mintime += $result->patternsBaseSizeTimemin;
+	// 		$maxsum += $result->techPicPricemax; $maxtime += $result->techPicTimemax;
+   //      }
+   //      if ($gradation == 1) {
+   //          $avgsum += $result->gradationPriceAvg; $avgtime += $result->gradationTimeAvg;
+	// 		$minsum += $result->gradationPricemin; $mintime += $result->gradationTimemin;
+	// 		$maxsum += $result->gradationPricemax; $maxtime += $result->gradationTimemax;
+   //      }
+   //      if ($techDescription == 1) {
+   //          $avgsum += $result->techDescriptionPriceAvg; $avgtime += $result->techDescriptionTimeAvg;
+	// 		$minsum += $result->techDescriptionPricemin; $mintime += $result->techDescriptionTimemin;
+	// 		$maxsum += $result->techDescriptionPricemax; $maxtime += $result->techDescriptionTimemax;
+   //      }
+   //      if ($specification == 1) {
+   //          $avgsum += $result->specificationPriceAvg; $avgtime += $result->specificationTimeAvg;
+	// 		$minsum += $result->specificationPricemin; $mintime += $result->specificationTimemin;
+	// 		$maxsum += $result->specificationPricemax; $maxtime += $result->specificationTimemax;
+   //      }
+   //      if ($techMap == 1) {
+   //          $avgsum += $result->techMapPriceAvg; $avgtime += $result->techMapTimeAvg;
+	// 		$minsum += $result->techMapPricemin; $mintime += $result->techMapTimemin;
+	// 		$maxsum += $result->techMapPricemax; $maxtime += $result->techMapTimemax;
+   //      }
+   //      if ($layoutPattern == 1) {
+   //          $avgsum += $result->layoutPatternPriceAvg; $avgtime += $result->layoutPatternTimeAvg;
+	// 		$minsum += $result->layoutPatternPricemin; $mintime += $result->layoutPatternTimemin;
+	// 		$maxsum += $result->layoutPatternPricemax; $maxtime += $result->layoutPatternTimemax;
+   //      }
+   //      if ($confessionCard == 1) {
+   //          $avgsum += $result->confessionCardPriceAvg; $avgtime += $result->confessionCardTimeAvg;
+	// 		$minsum += $result->confessionCardPricemin; $mintime += $result->confessionCardTimemin;
+	// 		$maxsum += $result->confessionCardPricemax; $maxtime += $result->confessionCardTimemax;
+   //      }
+   //      if ($cut == 1) {
+   //          $avgsum += $result->cutPriceAvg; $avgtime += $result->cutTimeAvg;
+	// 		$minsum += $result->cutPricemin; $mintime += $result->cutTimemin;
+	// 		$maxsum += $result->cutPricemax; $maxtime += $result->cutTimemax;
+   //      }
+   //      if ($tailoring == 1) {
+   //          $avgsum += $result->tailoringPriceAvg; $avgtime += $result->tailoringTimeAvg;
+	// 		$minsum += $result->tailoringPricemin; $mintime += $result->tailoringTimemin;
+	// 		$maxsum += $result->tailoringPricemax; $maxtime += $result->tailoringTimemax;
+   //      }
+   //  }
+//     $response .= "$avgsum, $avgtime, $minsum, $mintime, $maxsum, $maxtime
+// 	 <table>
+//   <tr>
+//     <th>Тип заказчика</th>
+//     <th>Стоимость услуги</th>
+//     <th>Сроки</th>
+//   </tr>
+//   <tr>
+//     <td>Самый дешевый</td>
+//     <td>$minsum</td>
+//     <td>$maxtime</td>
+//   </tr>
+//   <tr>
+//     <td>Самый дорогой</td>
+// 	 <td>$maxsum</td>
+//     <td>$avgtime</td>
+//   </tr>
+//   <tr>
+//     <td>Самый быстрый</td>
+//     <td>$avgsum</td>
+// 	 <td>$mintime</td>
+//   </tr>
+//   <tr>
+//     <td>Средний</td>
+//     <td>$avgsum</td>
+//     <td>$avgtime</td>
+//   </tr>
+  
+// </table>
+
+// 	 ";
     echo $response;
     wp_die();
 }
