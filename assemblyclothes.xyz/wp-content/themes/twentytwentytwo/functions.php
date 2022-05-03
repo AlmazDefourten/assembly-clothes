@@ -208,41 +208,40 @@ function listOfVendors() {
     global $post;
     $card_id = json_decode($_REQUEST['cardId']);
     $id_user=get_current_user_id();
-    $sql = "SELECT ";
-    if ($techPic == 1) {
-       $sql .= "techPicPrice, techPicTime ";
-    }
-    if ($patternsBaseSize == 1) {
-        $sql .= " patternsBaseSizePrice, patternsBaseSizeTime";
-    }
-    if ($gradation == 1) {
-        $sql .= " gradationPrice, gradationTime";
-    }
-    if ($techDescription == 1) {
-        $sql .= " techDescriptionPrice, techDescriptionTime";
-    }
-    if ($specification == 1) {
-        $sql .= " specificationPrice, specificationTime";
-    }
-    if ($techMap == 1) {
-        $sql .= " techMapPrice, techMapTime";
-    }
-    if ($layoutPattern == 1) {
-        $sql .= " layoutPatternPrice, layoutPatternTime";
-    }
-    if ($confessionCard == 1) {
-        $sql .= " confessionCardPrice, confessionCardTime";
-    }
-    if ($cut == 1) {
-        $sql .= " cutPrice, cutTime";
-    }
-    if ($tailoring == 1) {
-        $sql .= " tailoringPrice, tailoringTime";
-    }
+    $sql = "SELECT *";
+   //  if ($techPic == 1) {
+   //     $sql .= "techPicPrice, techPicTime, ";
+   //  }
+   //  if ($patternsBaseSize == 1) {
+   //      $sql .= " patternsBaseSizePrice, patternsBaseSizeTime,";
+   //  }
+   //  if ($gradation == 1) {
+   //      $sql .= " gradationPrice, gradationTime,";
+   //  }
+   //  if ($techDescription == 1) {
+   //      $sql .= " techDescriptionPrice, techDescriptionTime,";
+   //  }
+   //  if ($specification == 1) {
+   //      $sql .= " specificationPrice, specificationTime,";
+   //  }
+   //  if ($techMap == 1) {
+   //      $sql .= " techMapPrice, techMapTime,";
+   //  }
+   //  if ($layoutPattern == 1) {
+   //      $sql .= " layoutPatternPrice, layoutPatternTime,";
+   //  }
+   //  if ($confessionCard == 1) {
+   //      $sql .= " confessionCardPrice, confessionCardTime,";
+   //  }
+   //  if ($cut == 1) {
+   //      $sql .= " cutPrice, cutTime,";
+   //  }
+   //  if ($tailoring == 1) {
+   //      $sql .= " tailoringPrice, tailoringTime,";
+   //  }
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
     
     $results = $wpdb->get_results($sql);
-
 	 $persons=[];
 	 foreach($results as $result){
 		 $sum=0;
