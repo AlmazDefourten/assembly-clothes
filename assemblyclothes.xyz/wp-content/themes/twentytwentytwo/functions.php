@@ -434,29 +434,34 @@ function listOfVendors() {
     $response .= "
 	 <table style='text-align: center;    border: 1px solid;'>
   <tr>
-    <th>Тип заказчика</th>
+    <th>Тип поставщика</th>
     <th>Стоимость услуги</th>
     <th>Сроки</th>
+	 <th>Поставщик</th>
   </tr>
   <tr>
     <td>Самый дешевый</td>
     <td>$personMin->sum</td>
     <td>$personMin->time</td>
+	 <td><a href='#'>".get_userdata($personMin->wendorId)->user_login."</a></td>
   </tr>
   <tr>
     <td>Самый дорогой</td>
 	 <td>$personMax->sum</td>
     <td>$personMax->time</td>
+	 <td><a href='#'>".get_userdata($personMax->wendorId)->user_login."</a></td>
   </tr>
   <tr>
     <td>Самый быстрый</td>
     <td>$personFast->sum</td>
     <td>$personFast->time</td>
+	 <td><a href='#'>".get_userdata($personFast->wendorId)->user_login."</a></td>
   </tr>
   <tr>
     <td>Средний</td>
     <td>$personAvg->sum</td>
     <td>$personAvg->time</td>
+	 <td><a href='#'>".get_userdata($personAvg->wendorId)->user_login."</a></td>
   </tr>
   
 </table>
