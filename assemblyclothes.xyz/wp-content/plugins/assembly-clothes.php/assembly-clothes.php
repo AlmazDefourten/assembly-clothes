@@ -37,28 +37,28 @@ function formSupplierFun($attrs){
 	<tbody>
 		
 	<tr>
-	<td> <?=display_name?> </td>
-	<td> <?=techPicPrice?> </td>
-	<td> <?=techPicTime?></td>
-	<td> <?=patternsBaseSizePrice?></td>
-	<td> <?=patternsBaseSizeTime?></td>
-	<td> <?=gradationPrice?></td>
-	<td> <?=gradationTime?></td>
-	<td> <?=techDescriptionPrice?></td>
-	<td> <?=techDescriptionTime?></td>
-	<td> <?=specificationPrice?></td>
-	<td> <?=specificationTime?></td>
-	<td> <?=techMapPrice?></td>
-	<td> <?=techMapTime?></td>
-	<td> <?=layoutPatternPrice?></td>
-	<td> <?=layoutPatternTime?></td>
-	<td> <?=confessionCardPrice?></td>
-	<td> <?=confessionCardTime?></td>
-	<td> <?=cutPrice?></td>
-	<td> <?=cutTime?></td>
-	<td> <?=tailoringPrice?></td>
-	<td> <?=tailoringTime?></td>
-	<td> <?=cardProductId?></td>
+	<td> display_name </td>
+	<td> techPicPrice </td>
+	<td> techPicTime</td>
+	<td> patternsBaseSizePrice</td>
+	<td> patternsBaseSizeTime</td>
+	<td> gradationPrice</td>
+	<td> gradationTime</td>
+	<td> techDescriptionPrice</td>
+	<td> techDescriptionTime</td>
+	<td> specificationPrice</td>
+	<td> specificationTime</td>
+	<td> techMapPrice</td>
+	<td> techMapTime</td>
+	<td> layoutPatternPrice</td>
+	<td> layoutPatternTime</td>
+	<td> confessionCardPrice</td>
+	<td> confessionCardTime</td>
+	<td> cutPrice</td>
+	<td> cutTime</td>
+	<td> tailoringPrice</td>
+	<td> tailoringTime</td>
+	<td> cardProductId</td>
 	</tr>
 
 	 <?php
