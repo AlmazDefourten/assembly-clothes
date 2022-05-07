@@ -27,7 +27,7 @@ function formSupplierFun($attrs){
 	global $post;
 	global $wpdb;
 
-	$sups = $wpdb->get_results("SELECT * FROM $wpdb->prefix"."cost_estimate a JOIN $wpdb->prefix"."users b ON a.ID = wendorId");
+	$sups = $wpdb->get_results("SELECT * FROM $wpdb->prefix"."cost_estimate a JOIN $wpdb->prefix"."users b ON b.ID = a.wendorId");
 
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
