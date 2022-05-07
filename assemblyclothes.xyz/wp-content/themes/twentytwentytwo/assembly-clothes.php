@@ -21,38 +21,6 @@ function inputHiddenPostNameEstimate($attrs){
 	return '<input type="hidden" name="action" value="admin_post_estimate_post" />';
 }
 
-
-function formSupplierFun($attrs){
-	ob_start();
-	global $post;
-	global $wpdb;
-
-	$sups = $wpdb->get_results("SELECT * FROM $wpdb->prefix"."cost_estimate");
-
-	?>
-	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
-	<input type="hidden" name="action" value="estimate_post" />
-	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
-	<table style="height: 346px;" width="824">
-	<tbody>
-	 <?php
-	foreach($sups as $sup){
-		?>
-		<tr>
-		<td>lololo</td>
-		<td><input name="techPicPrice" required="" type="number" value="<?=$sup->techPicPrice?>"/></td>
-		<td><input name="techPicTime" required="" type="number" value="<?=$sup->techPicTime?>"/></td>
-		</tr>
-		<?php
-	}
-	?>
-	</tbody>
-	</table>
-	<?php
-	return ob_get_clean();
-}
-
-
 function formEstimateFun($attrs){
 	ob_start();
 	global $post;
@@ -211,7 +179,7 @@ return ob_get_clean();
 	add_shortcode('formEstimate','formEstimateFun');
 	add_shortcode('buttonEstimate', 'buttonEstimate');
 	add_shortcode('idCard','idCardFun');
-	add_shortcode('formSupplier','formSupplierFun');
+	
 
 function buttonEstimate($attrs) {
     ob_start();
