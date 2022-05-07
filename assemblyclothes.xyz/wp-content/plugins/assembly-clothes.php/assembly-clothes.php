@@ -39,7 +39,7 @@ function formSupplierFun($attrs){
 	foreach($sups as $sup){
 		?>
 		<tr>
-		<td><input name="display_name" required="" type="text" value="<?=$sup->display_name?>"/></td>
+		<td> <?=$sup->display_name?> </td>
 		<td><input name="techPicPrice" required="" type="number" value="<?=$sup->techPicPrice?>"/></td>
 		<td><input name="techPicTime" required="" type="number" value="<?=$sup->techPicTime?>"/></td>
 		</tr>
@@ -212,6 +212,7 @@ return ob_get_clean();
 	add_shortcode('buttonEstimate', 'buttonEstimate');
 	add_shortcode('idCard','idCardFun');
 	add_shortcode('formSupplier','formSupplierFun');
+
 
 function buttonEstimate($attrs) {
     ob_start();
