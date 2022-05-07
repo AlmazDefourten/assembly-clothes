@@ -27,7 +27,7 @@ function formSupplierFun($attrs){
 	global $post;
 	global $wpdb;
 
-	$sups = $wpdb->get_results("SELECT * FROM $wpdb->prefix"."cost_estimate");
+	$sups = $wpdb->get_results("SELECT * FROM $wpdb->prefix"."cost_estimate a JOIN $wpdb->prefix"."wp_users b ON a.ID = wendorId");
 
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
@@ -39,7 +39,7 @@ function formSupplierFun($attrs){
 	foreach($sups as $sup){
 		?>
 		<tr>
-		<td>lololo</td>
+		<td><input name="display_name" required="" type="number" value="<?=$sup->display_name?>"/></td>
 		<td><input name="techPicPrice" required="" type="number" value="<?=$sup->techPicPrice?>"/></td>
 		<td><input name="techPicTime" required="" type="number" value="<?=$sup->techPicTime?>"/></td>
 		</tr>
