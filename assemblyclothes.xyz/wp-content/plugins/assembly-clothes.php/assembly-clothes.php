@@ -33,8 +33,34 @@ function formSupplierFun($attrs){
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
 	<input type="hidden" name="action" value="estimate_post" />
 	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
-	<table style="height: 346px;" width="824">
+	<table style="height: 346px;" width="1024">
 	<tbody>
+		
+	<tr>
+	<td> <?=display_name?> </td>
+	<td> <?=techPicPrice?> </td>
+	<td> <?=techPicTime?></td>
+	<td> <?=patternsBaseSizePrice?></td>
+	<td> <?=patternsBaseSizeTime?></td>
+	<td> <?=gradationPrice?></td>
+	<td> <?=gradationTime?></td>
+	<td> <?=techDescriptionPrice?></td>
+	<td> <?=techDescriptionTime?></td>
+	<td> <?=specificationPrice?></td>
+	<td> <?=specificationTime?></td>
+	<td> <?=techMapPrice?></td>
+	<td> <?=techMapTime?></td>
+	<td> <?=layoutPatternPrice?></td>
+	<td> <?=layoutPatternTime?></td>
+	<td> <?=confessionCardPrice?></td>
+	<td> <?=confessionCardTime?></td>
+	<td> <?=cutPrice?></td>
+	<td> <?=cutTime?></td>
+	<td> <?=tailoringPrice?></td>
+	<td> <?=tailoringTime?></td>
+	<td> <?=cardProductId?></td>
+	</tr>
+
 	 <?php
 	foreach($sups as $sup){
 		?>
