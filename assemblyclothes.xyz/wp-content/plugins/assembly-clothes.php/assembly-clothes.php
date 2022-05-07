@@ -40,8 +40,27 @@ function formSupplierFun($attrs){
 		?>
 		<tr>
 		<td> <?=$sup->display_name?> </td>
-		<td><input name="techPicPrice" required="" type="number" value="<?=$sup->techPicPrice?>"/></td>
-		<td><input name="techPicTime" required="" type="number" value="<?=$sup->techPicTime?>"/></td>
+		<td> <?=$sup->techPicPrice?> </td>
+		<td> <?=$sup->techPicTime?></td>
+		<td> <?=$sup->patternsBaseSizePrice?></td>
+		<td> <?=$sup->patternsBaseSizeTime?></td>
+		<td> <?=$sup->gradationPrice?></td>
+		<td> <?=$sup->gradationTime?></td>
+		<td> <?=$sup->techDescriptionPrice?></td>
+		<td> <?=$sup->techDescriptionTime?></td>
+		<td> <?=$sup->specificationPrice?></td>
+		<td> <?=$sup->specificationTime?></td>
+		<td> <?=$sup->techMapPrice?></td>
+		<td> <?=$sup->techMapTime?></td>
+		<td> <?=$sup->layoutPatternPrice?></td>
+		<td> <?=$sup->layoutPatternTime?></td>
+		<td> <?=$sup->confessionCardPrice?></td>
+		<td> <?=$sup->confessionCardTime?></td>
+		<td> <?=$sup->cutPrice?></td>
+		<td> <?=$sup->cutTime?></td>
+		<td> <?=$sup->tailoringPrice?></td>
+		<td> <?=$sup->tailoringTime?></td>
+		<td> <?=$sup->cardProductId?></td>
 		</tr>
 		<?php
 	}
