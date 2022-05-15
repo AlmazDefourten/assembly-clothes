@@ -33,7 +33,7 @@ function formSupplierFun($attrs){
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
 	<input type="hidden" name="action" value="estimate_post" />
 	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
-	<table style="height: 346px;" width="1024">
+	<table style="height: 346px;" width="1600">
 	<tbody>
 		
 	<tr>
