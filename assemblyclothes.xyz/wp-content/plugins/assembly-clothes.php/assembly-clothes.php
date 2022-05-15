@@ -37,30 +37,30 @@ function formSupplierFun($attrs){
 	<tbody>
 		
 	<tr>
-	<td> display_name </td>
-	<td> techPicPrice </td>
-	<td> techPicTime</td>
-	<td> patternsBaseSizePrice</td>
-	<td> patternsBaseSizeTime</td>
-	<td> gradationPrice</td>
-	<td> gradationTime</td>
-	<td> techDescriptionPrice</td>
-	<td> techDescriptionTime</td>
-	<td> specificationPrice</td>
-	<td> specificationTime</td>
-	<td> techMapPrice</td>
-	<td> techMapTime</td>
-	<td> layoutPatternPrice</td>
-	<td> layoutPatternTime</td>
-	<td> confessionCardPrice</td>
-	<td> confessionCardTime</td>
-	<td> cutPrice</td>
-	<td> cutTime</td>
-	<td> tailoringPrice</td>
-	<td> tailoringTime</td>
+	<td> Имя </td>
+	<td> Стоимость </td>
+	<td> Сроки (Сутки)</td>
+	<td> Лекала на базовый размер</td>
+	<td> Сроки</td>
+	<td> Градация на 1 размер</td>
+	<td> Сроки</td>
+	<td> Техническое описание модели</td>
+	<td> Сроки</td>
+	<td> Спецификация</td>
+	<td> Сроки</td>
+	<td> Технологическая карта</td>
+	<td> Сроки</td>
+	<td> Раскладка лекал</td>
+	<td> Сроки</td>
+	<td> Конфекционная карта</td>
+	<td> Сроки</td>
+	<td> Раскрой</td>
+	<td> Сроки</td>
+	<td> Пошив изделия</td>
+	<td> Сроки</td>
 	<td> cardProductId</td>
 	</tr>
-
+	
 	 <?php
 	foreach($sups as $sup){
 		?>
