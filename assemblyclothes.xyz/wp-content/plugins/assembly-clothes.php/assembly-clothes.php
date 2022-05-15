@@ -39,54 +39,45 @@ function formSupplierFun($attrs){
 	<tr>
 	<td> Имя </td>
 	<td> Стоимость </td>
-	<td> Сроки (Сутки)</td>
 	<td> Лекала на базовый размер</td>
-	<td> Сроки</td>
 	<td> Градация на 1 размер</td>
-	<td> Сроки</td>
 	<td> Техническое описание модели</td>
-	<td> Сроки</td>
 	<td> Спецификация</td>
-	<td> Сроки</td>
 	<td> Технологическая карта</td>
-	<td> Сроки</td>
 	<td> Раскладка лекал</td>
-	<td> Сроки</td>
 	<td> Конфекционная карта</td>
-	<td> Сроки</td>
 	<td> Раскрой</td>
-	<td> Сроки</td>
 	<td> Пошив изделия</td>
-	<td> Сроки</td>
-	<td> cardProductId</td>
 	</tr>
-	
+
 	 <?php
 	foreach($sups as $sup){
 		?>
 		<tr>
 		<td> <?=$sup->display_name?> </td>
 		<td> <?=$sup->techPicPrice?> </td>
-		<td> <?=$sup->techPicTime?></td>
 		<td> <?=$sup->patternsBaseSizePrice?></td>
-		<td> <?=$sup->patternsBaseSizeTime?></td>
 		<td> <?=$sup->gradationPrice?></td>
-		<td> <?=$sup->gradationTime?></td>
 		<td> <?=$sup->techDescriptionPrice?></td>
-		<td> <?=$sup->techDescriptionTime?></td>
 		<td> <?=$sup->specificationPrice?></td>
-		<td> <?=$sup->specificationTime?></td>
 		<td> <?=$sup->techMapPrice?></td>
-		<td> <?=$sup->techMapTime?></td>
 		<td> <?=$sup->layoutPatternPrice?></td>
-		<td> <?=$sup->layoutPatternTime?></td>
 		<td> <?=$sup->confessionCardPrice?></td>
-		<td> <?=$sup->confessionCardTime?></td>
 		<td> <?=$sup->cutPrice?></td>
-		<td> <?=$sup->cutTime?></td>
 		<td> <?=$sup->tailoringPrice?></td>
+		</tr>
+		<tr>
+		<td> Сроки (Сутки)</td>	
+		<td> <?=$sup->techPicTime?></td>
+		<td> <?=$sup->patternsBaseSizeTime?></td>
+		<td> <?=$sup->gradationTime?></td>
+		<td> <?=$sup->techDescriptionTime?></td>
+		<td> <?=$sup->specificationTime?></td>
+		<td> <?=$sup->techMapTime?></td>
+		<td> <?=$sup->layoutPatternTime?></td>
+		<td> <?=$sup->confessionCardTime?></td>
+		<td> <?=$sup->cutTime?></td>
 		<td> <?=$sup->tailoringTime?></td>
-		<td> <?=$sup->cardProductId?></td>
 		</tr>
 		<?php
 	}
