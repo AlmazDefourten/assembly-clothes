@@ -58,7 +58,7 @@ function formFurnitureFun($attrs){
     p.post_type = 'product'
     AND
     tt.taxonomy LIKE 'pa_%'");
-	var $result = "";
+	$result = "";
 	foreach($furns as $furn) {
 		$result .= "<td><?=$furn.name?></td>";
 	}
