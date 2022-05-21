@@ -59,7 +59,7 @@ function formFurnitureFun($attrs){
     p.post_type = 'product'
     AND
     tt.taxonomy LIKE 'pa_%'");
-	$result = "";
+	$result = "hgfghjkjjknkj";
 	foreach($furns as $furn) {
 		$result .= "<td><?=$furn->name?></td>";
 	}
@@ -149,6 +149,7 @@ function formSupplierFun($attrs){
 	?>
 	</tbody>
 	</table>
+	</form>
 	<?php
 	return ob_get_clean();
 }
