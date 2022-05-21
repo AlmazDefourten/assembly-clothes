@@ -57,7 +57,7 @@ function formFurnitureFun($attrs){
 						?><td><?=$price->price?></td><?php
 						break;
 					}
-					if ($vendor->ID == $price->wendorId) {
+					else if ($vendor->ID == $price->wendorId) {
 						?><td>Нет</td><?php
 					}
 				}
