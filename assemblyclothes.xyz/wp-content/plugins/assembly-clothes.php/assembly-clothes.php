@@ -311,7 +311,7 @@ return ob_get_clean();
 	add_shortcode('buttonEstimate', 'buttonEstimate');
 	add_shortcode('idCard','idCardFun');
 	add_shortcode('formSupplier','formSupplierFun');
-	add_shortcode('formFurniture','formFurnitureFun')
+	add_shortcode('formFurniture','formFurnitureFun');
 
 
 function buttonEstimate($attrs) {
