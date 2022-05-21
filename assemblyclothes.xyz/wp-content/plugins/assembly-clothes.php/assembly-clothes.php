@@ -320,7 +320,7 @@ function formEstimateFun($attrs){
 		?>
 		<tr>
 		<td><?=$res->type?>- <?=$res->name?></td>
-		<td><input name="test<?$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
+		<td><input name="<?=$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
 		</tr>
 		
 		
@@ -479,7 +479,7 @@ function add_estimate(){
 
 		$dop=$wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='14' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' ORDER BY type");
 		foreach($dop as $res){
-			$price=trim(iconv_substr(strip_tags($_POST['test'.$res->term_id]), 0, 100));
+			$price=trim(iconv_substr(strip_tags($_POST[$res->term_id]), 0, 100));
 			if(trim(iconv_substr(strip_tags($_POST['getMethod']), 0, 100))=="insert"){
 				$wpdb->insert("wp_furns_price",array('price'=>$price,'wendorId' => $wendorId,'term_id'=>$res->term_id));
 			}else{
