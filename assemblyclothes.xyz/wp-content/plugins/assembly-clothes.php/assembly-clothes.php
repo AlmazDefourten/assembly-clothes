@@ -48,10 +48,12 @@ function formSupplierFun($attrs){
 	<td> Конфекционная карта</td>
 	<td> Раскрой</td>
 	<td> Пошив изделия</td>
+	<td> Общая сумма</td>
 	</tr>
 
 	 <?php
 	foreach($sups as $sup){
+		$summa = $sup->techPicPrice + $sup->patternsBaseSizePrice + $sup->gradationPrice + $sup->techDescriptionPrice + $sup->specificationPrice + $sup->techMapPrice + $sup->layoutPatternPrice + $sup->confessionCardPrice + $sup->cutPrice + $sup->tailoringPrice;
 		?>
 		<tr>
 		<td> <?=$sup->display_name?> </td>
@@ -65,6 +67,7 @@ function formSupplierFun($attrs){
 		<td> <?=$sup->confessionCardPrice?></td>
 		<td> <?=$sup->cutPrice?></td>
 		<td> <?=$sup->tailoringPrice?></td>
+		<td> <?=$summa?></td>
 		</tr>
 		<tr>
 		<td> Сроки (Сутки)</td>	
