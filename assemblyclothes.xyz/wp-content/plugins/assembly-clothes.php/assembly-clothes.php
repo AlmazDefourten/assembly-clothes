@@ -160,7 +160,7 @@ function formEstimateFun($attrs){
 	$id_user=get_current_user_id();
 	$post_exist=$wpdb->get_row("SELECT * FROM $wpdb->prefix"."cost_estimate WHERE wendorId=$id_user");
 	$dop=$wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='14' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' ORDER BY type");
-	var_dump($dop);
+	// var_dump($dop);
 	if(!$post_exist){
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
@@ -222,6 +222,9 @@ function formEstimateFun($attrs){
 <td>Пошив изделия</td>
 <td><input name="tailoringPrice" required="" type="number" /></td>
 <td><input name="tailoringTime" required="" type="number" /></td>
+</tr>
+<tr>
+	<td>Дополнительные услуги</td>
 </tr>
 <?
 	foreach($dop as $res){
@@ -306,10 +309,12 @@ function formEstimateFun($attrs){
 <td><input name="tailoringPrice" required="" type="number" value="<?=$post_exist->tailoringPrice?>"/></td>
 <td><input name="tailoringTime" required="" type="number" value="<?=$post_exist->tailoringTime?>"/></td>
 </tr>
-
+<tr>
+	<td>Дополнительные услуги</td>
+</tr>
 <?
 	foreach($dop as $res){
-		var_dump($res);
+		// var_dump($res);
 		$priceExist=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id=".$res->term_id);
 		$price=0;
 		if(!$priceExist){
