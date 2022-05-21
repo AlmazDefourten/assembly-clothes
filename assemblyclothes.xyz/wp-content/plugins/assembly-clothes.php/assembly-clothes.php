@@ -30,7 +30,7 @@ function formFurnitureFun($attrs){
 
 	$furns = $wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, (SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '')) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $productId AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%'");
 	$prices = $wpdb->get_results("SELECT * FROM `wp_furns_price` WHERE wendorid = $productId" );
-	$vendors = $wpdb->get_results("SELECT DISTINCT wendorId FROM `wp_furns_price` WHERE term_id IN (SELECT term_id FROM wp_terms WHERE term_id IN (SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $productId AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%'))") ;
+	$vendors = $wpdb->get_results("SELECT ID, display_name FROM wp_users WHERE ID = (SELECT DISTINCT wendorId FROM wp_furns_price WHERE term_id IN (SELECT term_id FROM wp_terms WHERE term_id IN (SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $productId AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%')))") ;
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
 	<input type="hidden" name="action" value="estimate_post" />
@@ -50,7 +50,7 @@ function formFurnitureFun($attrs){
 	</tr>
 	<?php
 	foreach($vendors as $vendor){
-		?><tr><td>display_name</td><?php
+		?><tr><td><?=$vendor->display_name?></td><?php
 		foreach($prices as $price) {
 			foreach($furns as $furn){
 				if($vendor->wendorId == $price->wendorId && $furn->term_id == $price->term_id){
