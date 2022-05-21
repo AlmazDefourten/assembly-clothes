@@ -42,17 +42,24 @@ function formFurnitureFun($attrs){
 		<?php
 	
 	foreach($furns as $furn) {
+		if($furn->name != "Нет"){
 		?><td><?=$furn->name?></td><?php
+		}
 	}?>
 	</tr>
 	<?php
 	foreach($vendors as $vendor){
 		?><tr><td><?=$vendor->display_name?></td><?php
 		foreach($furns as $furn){
-			foreach($prices as $price){
-				if($vendor->ID == $price->wendorId && $furn->term_id == $price->term_id){
-					?><td><?=$price->price?></td><?php
-					break;
+			if($furn->name != "Нет"){
+				foreach($prices as $price){
+					if($vendor->ID == $price->wendorId && $furn->term_id == $price->term_id){
+						?><td><?=$price->price?></td><?php
+						break;
+					}
+					if ($vendor->ID == $price->wendorId) {
+						?><td>Нет</td><?php
+					}
 				}
 			}
 		}
