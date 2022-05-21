@@ -315,12 +315,12 @@ function formEstimateFun($attrs){
 		if(!$priceExist){
 			$priceCreate=$wpdb->insert("wp_furns_price",array('price'=>'0','wendorId' => $id_user,'term_id'=>$res->term_id));
 		}else{
-			$price=$res->price;
+			$price=$priceExist->price;
 		}
 		?>
 		<tr>
 		<td><?=$res->type?>- <?=$res->name?></td>
-		<td><input name="<?$res->term_id?>" value="<?=$res->price?>" required="" type="number" /></td>
+		<td><input name="<?$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
 		</tr>
 		
 		
