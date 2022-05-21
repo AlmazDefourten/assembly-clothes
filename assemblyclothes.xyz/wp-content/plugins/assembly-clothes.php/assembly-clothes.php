@@ -59,12 +59,13 @@ function formFurnitureFun($attrs){
 						break;
 					}
 				}
-			}
-			if($cook != ""){
-				?><td><?=$cook?></td><?php
-			}
-			else{
-				?><td>Нет</td><?php
+				
+				if($cook != ""){
+					?><td><?=$cook?></td><?php
+				}
+				else{
+					?><td>Нет</td><?php
+				}
 			}
 		}
 		?></tr><?php
