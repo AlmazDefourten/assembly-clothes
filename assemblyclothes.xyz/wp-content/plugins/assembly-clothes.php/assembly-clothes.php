@@ -54,8 +54,6 @@ function formFurnitureFun($attrs){
 					?><td><?=$price->price?></td><?php
 					break;
 				}
-				else {?><td>Нету</td><?php
-				}
 			}
 		}
 		?></tr><?php
