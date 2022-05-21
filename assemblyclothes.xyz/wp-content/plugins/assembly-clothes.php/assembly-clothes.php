@@ -61,7 +61,7 @@ function formFurnitureFun($attrs){
     tt.taxonomy LIKE 'pa_%'");
 	$result = "";
 	foreach($furns as $furn) {
-		$result .= "<td><?=$furn.name?></td>";
+		$result .= "<td><?=$furn->name?></td>";
 	}
 
 	#$prices = $wodb->get_results("")
