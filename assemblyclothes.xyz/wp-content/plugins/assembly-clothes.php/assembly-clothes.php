@@ -320,7 +320,7 @@ function formEstimateFun($attrs){
 		?>
 		<tr>
 		<td><?=$res->type?>- <?=$res->name?></td>
-		<td><input name="<?'test'.$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
+		<td><input name="test<?$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
 		</tr>
 		
 		
