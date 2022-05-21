@@ -72,7 +72,7 @@ function formFurnitureFun($attrs){
 	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
 	<table style="height: 346px;" width="1600">
 	<tbody>
-	<tr><?php$result;?></tr>
+	<tr><?=$result?></tr>
 
 	
 	</tbody>
