@@ -28,37 +28,7 @@ function formFurnitureFun($attrs){
 	global $wpdb;
 	$productId = $post->ID;
 
-	$furns = $wpdb->get_results("SELECT DISTINCT
-    p.ID,
-    t.name,
-    t.term_id,
-    (
-        SELECT
-            wat.attribute_label
-        FROM
-            wp_woocommerce_attribute_taxonomies wat
-        WHERE
-            wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '')
-    ) AS 'type'
-	FROM
-    wp_posts AS p
-	INNER JOIN
-    wp_term_relationships AS tr
-    ON p.id = tr.object_id
-	INNER JOIN
-    wp_term_taxonomy AS tt
-    ON tt.term_taxonomy_id = tr.term_taxonomy_id
-	INNER JOIN
-    wp_terms AS t
-    ON t.term_id = tt.term_id
-	WHERE
-    p.ID = $productId
-    AND
-    tt.taxonomy = 'pa_фурнитура'
-    AND
-    p.post_type = 'product'
-    AND
-    tt.taxonomy LIKE 'pa_%'");
+	$furns = $wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, (SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '')) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $productId AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%'");
 	$result = "hgfghjkjjknkj";
 	foreach($furns as $furn) {
 		$result .= "<td><?=$furn->name?></td>";
