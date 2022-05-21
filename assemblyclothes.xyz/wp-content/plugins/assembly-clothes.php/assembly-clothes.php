@@ -37,7 +37,7 @@ function formFurnitureFun($attrs){
 	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
 	<table style="height: 346px;" width="1600">
 	<?php foreach($vendors as $vendor){
-		?><p><?=$vendor?></p><?php
+		?><p><?=$vendor->wendorId?></p><?php
 	}?>
 	<p><?=$prices?></p>
 	<tbody>
