@@ -26,6 +26,7 @@ function formFurnitureFun($attrs){
 	ob_start();
 	global $post;
 	global $wpdb;
+	$productId = $post->ID;
 
 	$furns = $wpdb->get_results("SELECT DISTINCT
     p.ID,
