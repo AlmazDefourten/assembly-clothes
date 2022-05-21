@@ -45,11 +45,12 @@ function formFurnitureFun($attrs){
 		if($furn->name != "Нет"){
 		?><td><?=$furn->name?></td><?php
 		}
-	}?>
+	}?><td>Общая цена</td>
 	</tr>
 	<?php
 	foreach($vendors as $vendor){
 		?><tr><td><?=$vendor->display_name?></td><?php
+		$summa = 0;
 		foreach($furns as $furn){
 			$cook = "";
 			if($furn->name != "Нет"){
@@ -62,13 +63,14 @@ function formFurnitureFun($attrs){
 				
 				if($cook != ""){
 					?><td><?=$cook?></td><?php
+					$summa += $cook;
 				}
 				else{
 					?><td>Нет</td><?php
 				}
 			}
-		}
-		?></tr><?php
+		}?><td><?=$summa?></td>
+	</tr><?php
 	}
 	?>
 	
