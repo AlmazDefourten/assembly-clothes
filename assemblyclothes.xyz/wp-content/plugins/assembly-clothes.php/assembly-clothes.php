@@ -54,7 +54,7 @@ function formFurnitureFun($attrs){
 		?><tr><?php
 		foreach($prices as $price) {
 			foreach($furns as $furn){
-				if($vendor == $price->wendorId && $furn->term_id == $price->term_id){
+				if($vendor->wendorId == $price->wendorId && $furn->term_id == $price->term_id){
 					?><td><?=$price->price?></td><?php
 				}
 			}
