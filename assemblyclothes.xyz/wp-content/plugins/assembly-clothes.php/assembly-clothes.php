@@ -45,6 +45,12 @@ function formFurnitureFun($attrs){
 	<p><?=$result?></p>
 	<tbody>
 	<tr><?=$result?></tr>
+	<tr>
+		<?php
+	foreach($furns as $furn) {
+		?><td><?=$furn->name?></td><?php
+	}?>
+	</tr>
 
 	
 	</tbody>
