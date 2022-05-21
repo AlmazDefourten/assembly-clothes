@@ -21,6 +21,66 @@ function inputHiddenPostNameEstimate($attrs){
 	return '<input type="hidden" name="action" value="admin_post_estimate_post" />';
 }
 
+function formFurnitureFun($attrs){
+
+	ob_start();
+	global $post;
+	global $wpdb;
+
+	$furns = $wpdb->get_results("SELECT DISTINCT
+    p.ID,
+    t.name,
+    t.term_id,
+    (
+        SELECT
+            wat.attribute_label
+        FROM
+            wp_woocommerce_attribute_taxonomies wat
+        WHERE
+            wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '')
+    ) AS 'type'
+	FROM
+    wp_posts AS p
+	INNER JOIN
+    wp_term_relationships AS tr
+    ON p.id = tr.object_id
+	INNER JOIN
+    wp_term_taxonomy AS tt
+    ON tt.term_taxonomy_id = tr.term_taxonomy_id
+	INNER JOIN
+    wp_terms AS t
+    ON t.term_id = tt.term_id
+	WHERE
+    p.ID = $productId
+    AND
+    tt.taxonomy = 'pa_фурнитура'
+    AND
+    p.post_type = 'product'
+    AND
+    tt.taxonomy LIKE 'pa_%'")
+	$result = ""
+	foreach($furns as $furn) {
+		$result .= "<td><?=$furn.name?></td>"
+	}
+
+	#$prices = $wodb->get_results("")
+	$results = ""
+
+	?>
+	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
+	<input type="hidden" name="action" value="estimate_post" />
+	<input type="hidden" name="redirect" value="<?=get_page_uri()?>"/>
+	<table style="height: 346px;" width="1600">
+	<tbody>
+	<tr><?php$result?></tr>
+
+	
+	</tbody>
+	</table>
+	<?php
+	return ob_get_clean();
+
+}
 
 function formSupplierFun($attrs){
 	ob_start();
@@ -56,31 +116,31 @@ function formSupplierFun($attrs){
 		$summa = $sup->techPicPrice + $sup->patternsBaseSizePrice + $sup->gradationPrice + $sup->techDescriptionPrice + $sup->specificationPrice + $sup->techMapPrice + $sup->layoutPatternPrice + $sup->confessionCardPrice + $sup->cutPrice + $sup->tailoringPrice;
 		?>
 		<tr>
-		<td> <?=$sup->display_name?> </td>
-		<td> <?=$sup->techPicPrice?> </td>
-		<td> <?=$sup->patternsBaseSizePrice?></td>
-		<td> <?=$sup->gradationPrice?></td>
-		<td> <?=$sup->techDescriptionPrice?></td>
-		<td> <?=$sup->specificationPrice?></td>
-		<td> <?=$sup->techMapPrice?></td>
-		<td> <?=$sup->layoutPatternPrice?></td>
-		<td> <?=$sup->confessionCardPrice?></td>
-		<td> <?=$sup->cutPrice?></td>
-		<td> <?=$sup->tailoringPrice?></td>
-		<td> <?=$summa?></td>
+		<td><?=$sup->display_name?></td>
+		<td><?=$sup->techPicPrice?></td>
+		<td><?=$sup->patternsBaseSizePrice?></td>
+		<td><?=$sup->gradationPrice?></td>
+		<td><?=$sup->techDescriptionPrice?></td>
+		<td><?=$sup->specificationPrice?></td>
+		<td><?=$sup->techMapPrice?></td>
+		<td><?=$sup->layoutPatternPrice?></td>
+		<td><?=$sup->confessionCardPrice?></td>
+		<td><?=$sup->cutPrice?></td>
+		<td><?=$sup->tailoringPrice?></td>
+		<td><?=$summa?></td>
 		</tr>
 		<tr>
 		<td> Сроки (Сутки)</td>	
-		<td> <?=$sup->techPicTime?></td>
-		<td> <?=$sup->patternsBaseSizeTime?></td>
-		<td> <?=$sup->gradationTime?></td>
-		<td> <?=$sup->techDescriptionTime?></td>
-		<td> <?=$sup->specificationTime?></td>
-		<td> <?=$sup->techMapTime?></td>
-		<td> <?=$sup->layoutPatternTime?></td>
-		<td> <?=$sup->confessionCardTime?></td>
-		<td> <?=$sup->cutTime?></td>
-		<td> <?=$sup->tailoringTime?></td>
+		<td><?=$sup->techPicTime?></td>
+		<td><?=$sup->patternsBaseSizeTime?></td>
+		<td><?=$sup->gradationTime?></td>
+		<td><?=$sup->techDescriptionTime?></td>
+		<td><?=$sup->specificationTime?></td>
+		<td><?=$sup->techMapTime?></td>
+		<td><?=$sup->layoutPatternTime?></td>
+		<td><?=$sup->confessionCardTime?></td>
+		<td><?=$sup->cutTime?></td>
+		<td><?=$sup->tailoringTime?></td>
 		</tr>
 		<?php
 	}
@@ -251,6 +311,7 @@ return ob_get_clean();
 	add_shortcode('buttonEstimate', 'buttonEstimate');
 	add_shortcode('idCard','idCardFun');
 	add_shortcode('formSupplier','formSupplierFun');
+	add_shortcode('formFurniture','formFurnitureFun')
 
 
 function buttonEstimate($attrs) {
