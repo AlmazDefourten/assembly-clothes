@@ -198,7 +198,7 @@ function sortObjectSetBy($objectSetForSort, $sortBy){
  }
 
 function listOfVendors() {
-	
+	$_REQUEST   = array_map('stripslashes_deep', $_REQUEST);
     $techPic = json_decode($_REQUEST['techPic']);
     $patternsBaseSize = json_decode($_REQUEST['patternsBaseSize']);
     $gradation = json_decode($_REQUEST['gradation']);
@@ -212,9 +212,7 @@ function listOfVendors() {
 	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
 	$req = $_REQUEST['dopPrice'];
-	$req_new = get_magic_quotes_gpc() ?
-    stripslashes($req) : $req;
-	$req_decode = json_decode($req_new);
+	$req_decode = json_decode($req));
 	var_dump($req_decode);
 	var_dump($quantity);
 	var_dump($test);
