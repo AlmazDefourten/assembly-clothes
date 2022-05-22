@@ -224,6 +224,7 @@ function formEstimateFun($attrs){
 <td><input name="tailoringTime" required="" type="number" /></td>
 </tr>
 <tr>
+	<td></td>
 	<td>Дополнительные услуги</td>
 </tr>
 <?
@@ -310,6 +311,7 @@ function formEstimateFun($attrs){
 <td><input name="tailoringTime" required="" type="number" value="<?=$post_exist->tailoringTime?>"/></td>
 </tr>
 <tr>
+	<td></td>
 	<td>Дополнительные услуги</td>
 </tr>
 <?
