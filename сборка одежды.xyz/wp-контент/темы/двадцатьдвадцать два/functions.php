@@ -357,7 +357,7 @@ function listOfVendors() {
 		$result_conf_echo .=  $result_conf;
 	 }
 	 else {
-		 $result_conf_echo = "<p style='solid red'>Для вывода цен по конфессионной карте разместите фурнитуру или выберите материал</p>";
+		 $result_conf_echo = "<p style='solid red' class='Error'>Для вывода цен по конфессионной карте разместите фурнитуру или выберите материал</p>";
 	 }
 	 echo $result_conf_echo;
 
