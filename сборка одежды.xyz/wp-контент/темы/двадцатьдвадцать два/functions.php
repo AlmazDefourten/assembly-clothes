@@ -320,7 +320,7 @@ function listOfVendors() {
 				}
 				else {
 					$result_conf .= "<tr><td> $price->display_name </td> <td>$price_quan</td> <td> $price->name </td></tr>"
-					flag = true;
+					$flag = true;
 				}
 			}
 			$material_conf = intval($dopPrice['material']);
