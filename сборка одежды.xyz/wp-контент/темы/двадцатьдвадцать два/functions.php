@@ -202,7 +202,7 @@ function listOfVendors() {
     $confessionCard = json_decode($_REQUEST['confessionCard']);
     $cut = json_decode($_REQUEST['cut']);
     $tailoring = json_decode($_REQUEST['tailoring']);
-	$quantity = json_decode($_REQUEST['quantity']);
+	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
 	$test = json_decode($_REQUEST['dopPrice[furniturs][collar][name]']);
 	var_dump($quantity);
