@@ -209,9 +209,13 @@ function listOfVendors() {
     $confessionCard = json_decode($_REQUEST['confessionCard']);
     $cut = json_decode($_REQUEST['cut']);
     $tailoring = json_decode($_REQUEST['tailoring']);
-	$quantity = json_decode(removeBOM($_REQUEST['dopPrice']));
+	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
-	$test = json_decode($_REQUEST['dopPrice[furniturs][collar][name]']);
+	$req = $_REQUEST['dopPrice'];
+	foreach($req as $re) {
+		var_dump($re);
+		echo $re;
+	}
 	var_dump($quantity);
 	var_dump($test);
 	echo $test;
