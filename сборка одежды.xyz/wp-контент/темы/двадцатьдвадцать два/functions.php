@@ -292,7 +292,7 @@ function listOfVendors() {
 			$result_conf = "123";
 			$sum+=$result->confessionCardPrice;
 			$time+=$result->confessionCardTime;
-			$furns = $dopPrice->furniturs;
+			$furns = $dopPrice['furniturs'];
 			foreach ($furns as $furn) {
 				$furn_name = $furn->name;
 				echo "<p>$furn_name</p>";
