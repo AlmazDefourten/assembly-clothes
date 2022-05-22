@@ -251,7 +251,7 @@ function listOfVendors() {
    //      $sql .= " tailoringPrice, tailoringTime,";
    //  }
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
-	$result_conf = "<table  style='text-align: center;    border: 1px solid red;'>";
+	$result_conf = "";
 	$is_have_rows = false;
     $results = $wpdb->get_results($sql);
 	 $persons=[];
@@ -353,7 +353,7 @@ function listOfVendors() {
 	 $result_conf .= "</table>";
 	 $result_conf_echo = "";
 	 if ($is_have_rows == true) {
-		$result_conf_echo .= '<th>Поставщик</th> <th>Цена</th>';
+		$result_conf_echo .= '<table  style='text-align: center;    border: 1px solid red;'><th>Поставщик</th> <th>Цена</th>';
 		$result_conf_echo .=  $result_conf;
 	 }
 	 echo $result_conf_echo;
