@@ -190,6 +190,13 @@ function sortObjectSetBy($objectSetForSort, $sortBy){
 	return $objectSetForSort;
  }
 
+ function removeBOM($data) {
+    if (0 === strpos(bin2hex($data), 'efbbbf')) {
+       return substr($data, 3);
+    }
+    return $data;
+}
+
 function listOfVendors() {
 	
     $techPic = json_decode($_REQUEST['techPic']);
@@ -202,13 +209,10 @@ function listOfVendors() {
     $confessionCard = json_decode($_REQUEST['confessionCard']);
     $cut = json_decode($_REQUEST['cut']);
     $tailoring = json_decode($_REQUEST['tailoring']);
-	$quantity = json_decode($_REQUEST['dopPrice']);
-	echo json_last_error();
+	$quantity = json_decode(removeBOM($_REQUEST['dopPrice']));
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
-	echo json_last_error();
 	$test = json_decode($_REQUEST['dopPrice[furniturs][collar][name]']);
 	var_dump($quantity);
-	echo json_last_error();
 	var_dump($test);
 	echo $test;
 	var_dump($dopPrice);
