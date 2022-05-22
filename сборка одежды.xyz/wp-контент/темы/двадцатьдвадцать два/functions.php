@@ -352,7 +352,7 @@ function listOfVendors() {
 	 }
 	 $result_conf .= "</table>";
 	 if ($is_have_rows == true) {
-	 	$result_conf = '<th>Поставщик</th> <th>Цена</th>'.$result_conf;
+	 	$result_conf = '<th>Поставщик</th> <th>Цена</th>' .$result_conf;
 	 }
 	 echo $result_conf;
 
