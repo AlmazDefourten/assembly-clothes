@@ -308,12 +308,17 @@ function listOfVendors() {
 			$sum+=$result->confessionCardPrice;
 			$time+=$result->confessionCardTime;
 			$furns = $dopPrice['furniturs'];
+			$vendor_name = "";
 			foreach ($furns as $furn) {
 				$furn_name = $furn['name'];
 				$price = $wpdb->get_row("SELECT a.price, b.display_name, t.name FROM `wp_furns_price` AS a JOIN `wp_users` AS b INNER JOIN wp_terms AS t ON t.term_id=a.term_id WHERE a.wendorId = b.ID AND a.term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.term_id = $furn_name)");
 				$price_quan = $price->price * $furn['quan'];
+				$vendor_name = $price->display_name;
 				$result_conf .= "<tr> <td>$price->display_name</td> <td>$price_quan</td> <td> $price->name </td></tr>";
 			}
+			$material_conf = intval($dopPrice['material']);
+			$price_mat = $wpdb->get_row("SELECT a.price, t.name FROM FROM `wp_furns_price` AS a INNER JOIN wp_terms AS t ON t.term_id=$material_conf WHERE a.term_id=$material_conf");
+			$result_conf .= "<tr><td> $vendor_name <td> <td> $price_mat->price </td> <td> $price_mat->name </td></tr>";
 		}
 		if ($cut == 1) {
 			$sum+=$result->cutPrice;
