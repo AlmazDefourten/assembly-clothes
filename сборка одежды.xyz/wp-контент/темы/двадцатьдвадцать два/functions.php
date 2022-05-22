@@ -329,7 +329,7 @@ function listOfVendors() {
 			$material_conf = intval($dopPrice['material']);
 			$price_mat = $wpdb->get_row("SELECT a.price, t.name FROM `wp_furns_price` AS a INNER JOIN wp_terms AS t ON t.term_id=$material_conf WHERE a.term_id=$material_conf");
 			if ($material_conf != 0) {
-				$result_conf .= "<tr><td> $price_mat->price </td> <td> $price_mat->name </td></tr>";
+				$result_conf .= "<tr><td rowspan='1'> $price_mat->price </td> <td> $price_mat->name </td></tr>";
 			}
 			if ($flag == true) {
 				$result_conf .= "<tr><td colspan='3'>_________________________________________________</td></tr>";
