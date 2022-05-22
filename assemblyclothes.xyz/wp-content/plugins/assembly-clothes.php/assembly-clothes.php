@@ -318,7 +318,7 @@ function formEstimateFun($attrs){
 <?
 	foreach($dop as $res){
 		// var_dump($res);
-		$priceExist=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id=".$res->term_id." AND wendorId=$id_user");
+		$priceExist=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id=".$res->term_id." AND wendorId=".$id_user);
 		$price=0;
 		if(!$priceExist){
 			$priceCreate=$wpdb->insert("wp_furns_price",array('price'=>'0','wendorId' => $id_user,'term_id'=>$res->term_id));
