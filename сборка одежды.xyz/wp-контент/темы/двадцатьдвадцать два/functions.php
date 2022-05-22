@@ -251,7 +251,8 @@ function listOfVendors() {
    //      $sql .= " tailoringPrice, tailoringTime,";
    //  }
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
-	$result_conf = "<table  style='text-align: center;    border: 1px solid;'>";
+	$result_conf = "<table  style='text-align: center;    border: 1px solid red;'>";
+	$result_conf .= "<th>Поставщик</th> <th>Цена</th>";
     $results = $wpdb->get_results($sql);
 	 $persons=[];
 	 foreach($results as $result){
@@ -309,7 +310,7 @@ function listOfVendors() {
 				$furn_name = $furn['name'];
 				$price = $wpdb->get_row("SELECT a.price, b.display_name FROM `wp_furns_price` AS a JOIN `wp_users` AS b WHERE a.wendorId = b.ID AND a.term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.term_id = $furn_name)");
 				$price_quan = $price->price * $furn['quan'];
-				$result_conf .= "<tr> $price->display_name Цена: $price_quan </tr>";
+				$result_conf .= "<tr> <td>$price->display_name</td> <td>$price_quan</td> </tr>";
 			}
 		}
 		if ($cut == 1) {
