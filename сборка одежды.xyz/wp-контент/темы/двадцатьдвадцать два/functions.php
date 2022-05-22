@@ -332,7 +332,7 @@ function listOfVendors() {
 				$result_conf .= "<tr><td> $price_mat->price </td> <td> $price_mat->name </td></tr>";
 			}
 			if ($flag == true) {
-				$result_conf .= "<td></td>";
+				$result_conf .= "<tr><td><br>_________________________________________________</td></tr>";
 			}
 		}
 		if ($cut == 1) {
