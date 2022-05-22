@@ -351,10 +351,12 @@ function listOfVendors() {
 		$persons[]=$person;
 	 }
 	 $result_conf .= "</table>";
+	 $result_conf_echo = "";
 	 if ($is_have_rows == true) {
-	 	$result_conf = '<th>Поставщик</th> <th>Цена</th>' .$result_conf;
+		$result_conf_echo .= '<th>Поставщик</th> <th>Цена</th>';
+		$result_conf_echo .=  $result_conf;
 	 }
-	 echo $result_conf;
+	 echo $result_conf_echo;
 
 
     $personsPriceSort=sortObjectSetBy($persons,'sum');
