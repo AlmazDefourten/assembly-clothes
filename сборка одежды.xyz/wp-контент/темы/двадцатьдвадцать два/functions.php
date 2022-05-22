@@ -289,7 +289,7 @@ function listOfVendors() {
 			$time+=$result->layoutPatternTime;
 		}
 		if ($confessionCard == 1) {
-			$result_conf = "";
+			$result_conf = "123";
 			$sum+=$result->confessionCardPrice;
 			$time+=$result->confessionCardTime;
 			$furns = $dopPrice->furniturs;
