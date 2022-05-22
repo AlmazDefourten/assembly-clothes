@@ -190,12 +190,12 @@ function sortObjectSetBy($objectSetForSort, $sortBy){
 	return $objectSetForSort;
  }
 
- function removeBOM($data) {
-    if (0 === strpos(bin2hex($data), 'efbbbf')) {
-       return substr($data, 3);
-    }
-    return $data;
-}
+ function remove_utf8_bom($text)
+ {
+	 $bom = pack('H*','EFBBBF');
+	 $text = preg_replace("/^$bom/", '', $text);
+	 return $text;
+ }
 
 function listOfVendors() {
 	
@@ -212,7 +212,9 @@ function listOfVendors() {
 	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
 	$req = $_REQUEST['dopPrice'];
-	$new_req = removeBOM($req);
+	$new_req = remove_utf8_bom($req);
+	$new_req = str_replace("{fu", "fu", $new_req);
+	$new_req = str_replace("one}", "one", $new_req);
 	$req_decode = json_decode($req);
 	var_dump($req_decode);
 	echo $req_decode;
