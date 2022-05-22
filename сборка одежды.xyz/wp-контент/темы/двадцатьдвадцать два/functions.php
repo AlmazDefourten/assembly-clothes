@@ -321,7 +321,7 @@ function listOfVendors() {
 			if ($material_conf != 0) {
 				$result_conf .= "<tr><td> $vendor_name </td> <td> $price_mat->price </td> <td> $price_mat->name </td></tr>";
 			}
-			$result_conf .= "<tr><td> </td></tr>";
+			$result_conf .= "<tr><td>_______</td></tr>";
 		}
 		if ($cut == 1) {
 			$sum+=$result->cutPrice;
