@@ -45,11 +45,12 @@ function formFurnitureFun($attrs){
 		if($furn->name != "Нет"){
 		?><td><?=$furn->name?></td><?php
 		}
-	}?>
+	}?><td>Общая цена</td>
 	</tr>
 	<?php
 	foreach($vendors as $vendor){
 		?><tr><td><?=$vendor->display_name?></td><?php
+		$summa = 0;
 		foreach($furns as $furn){
 			$cook = "";
 			if($furn->name != "Нет"){
@@ -62,13 +63,14 @@ function formFurnitureFun($attrs){
 				
 				if($cook != ""){
 					?><td><?=$cook?></td><?php
+					$summa += $cook;
 				}
 				else{
 					?><td>Нет</td><?php
 				}
 			}
-		}
-		?></tr><?php
+		}?><td><?=$summa?></td>
+	</tr><?php
 	}
 	?>
 	
@@ -156,9 +158,9 @@ function formEstimateFun($attrs){
 	global $wpdb;
 	$productId = $post->ID;
 	$id_user=get_current_user_id();
-	$post_exist=$wpdb->get_row("SELECT * FROM $wpdb->prefix"."cost_estimate WHERE wendorId=$id_user");
-	$dop=$wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id = "+ $productId +" AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' ORDER BY type");
-
+	$post_exist=$wpdb->get_row("SELECT * FROM $wpdb->prefix"."cost_estimate WHERE wendorId=$id_user AND cardProductId=$productId");
+	$dop=$wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='14' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' ORDER BY type");
+	// var_dump($dop);
 	if(!$post_exist){
 	?>
 	<form  action="<?= admin_url('admin-post.php'); ?>" method="post">
@@ -221,8 +223,12 @@ function formEstimateFun($attrs){
 <td><input name="tailoringPrice" required="" type="number" /></td>
 <td><input name="tailoringTime" required="" type="number" /></td>
 </tr>
+<tr>
+	<td>Дополнительные услуги</td>
+</tr>
 <?
 	foreach($dop as $res){
+		var_dump($res);
 		?>
 		<tr>
 		<td><?=$res->type?>- <?=$res->name?></td>
@@ -303,6 +309,30 @@ function formEstimateFun($attrs){
 <td><input name="tailoringPrice" required="" type="number" value="<?=$post_exist->tailoringPrice?>"/></td>
 <td><input name="tailoringTime" required="" type="number" value="<?=$post_exist->tailoringTime?>"/></td>
 </tr>
+<tr>
+	<td>Дополнительные услуги</td>
+</tr>
+<?
+	foreach($dop as $res){
+		// var_dump($res);
+		$priceExist=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id=".$res->term_id);
+		$price=0;
+		if(!$priceExist){
+			$priceCreate=$wpdb->insert("wp_furns_price",array('price'=>'0','wendorId' => $id_user,'term_id'=>$res->term_id));
+		}else{
+			$price=$priceExist->price;
+		}
+		?>
+		<tr>
+		<td><?=$res->type?>- <?=$res->name?></td>
+		<td><input name="<?=$res->term_id?>" value="<?=$price?>" required="" type="number" /></td>
+		</tr>
+		
+		
+		<?
+	}
+?>
+
 </tbody>
 </table>
 <input type='hidden' name='cardProductId' value='<?=$post->ID?>'/>
@@ -448,8 +478,20 @@ function add_estimate(){
 		if(trim(iconv_substr(strip_tags($_POST['getMethod']), 0, 100))=="insert"){
 			$wpdb->insert($wpdb->prefix.'cost_estimate',$query,$format);
 		}else{
-			$wpdb->update($wpdb->prefix.'cost_estimate',$query,['wendorId'=>$wendorId]);
+			$wpdb->update($wpdb->prefix.'cost_estimate',$query,['wendorId'=>$wendorId,'cardProductId'=>$cardProductId]);
 		}
+
+
+		$dop=$wpdb->get_results("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='14' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' ORDER BY type");
+		foreach($dop as $res){
+			$price=trim(iconv_substr(strip_tags($_POST[$res->term_id]), 0, 100));
+			if(trim(iconv_substr(strip_tags($_POST['getMethod']), 0, 100))=="insert"){
+				$wpdb->insert("wp_furns_price",array('price'=>$price,'wendorId' => $wendorId,'term_id'=>$res->term_id));
+			}else{
+				$wpdb->update('wp_furns_price',array('price'=>$price,'wendorId' => $wendorId,'term_id'=>$res->term_id),['term_id'=>$res->term_id,'wendorId'=>$wendorId]);
+			}
+		}
+
 		
 
 		$redirect = home_url();
