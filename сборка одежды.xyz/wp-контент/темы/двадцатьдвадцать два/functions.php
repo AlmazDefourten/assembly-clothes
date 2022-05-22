@@ -214,7 +214,7 @@ function listOfVendors() {
 	$req = $_REQUEST['dopPrice'];
 	$req_new = get_magic_quotes_gpc() ?
     stripslashes($req) : $req;
-	$req_decode = json_decode($req_new));
+	$req_decode = json_decode($req_new);
 	var_dump($req_decode);
 	var_dump($quantity);
 	var_dump($test);
