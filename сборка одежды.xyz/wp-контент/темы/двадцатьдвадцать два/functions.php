@@ -284,15 +284,17 @@ function listOfVendors() {
 			$time+=$result->techMapTime;
 			if($material!="none"){
 				$materialRow=$wpdb->get_row("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='$card_id' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' and NAME!='Нет' AND NAME='$material' ORDER BY type");
+				var_dump($materialRow);
 				$materialPrice=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id='$materialRow->term_id'");
+				var_dump($materialPrice);
 				$sum+=$materialPrice->price;
 			}
 			foreach($furniturs as $furnitur){
 				$furniturRow=$wpdb->get_row("SELECT DISTINCT p.ID, t.name, t.term_id, ( SELECT wat.attribute_label FROM wp_woocommerce_attribute_taxonomies wat WHERE wat.attribute_name LIKE REPLACE(tt.taxonomy, 'pa_', '') ) AS 'type' FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.id ='$card_id' AND tt.taxonomy in ('pa_фурнитура','pa_материал') AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND NAME!='Нет' AND t.term_id='".$furnitur['name']."' ORDER BY type");
-				var_dump($furnitur['quan']);
-				var_dump($furniturRow->term_id);
+				// var_dump($furnitur['quan']);
+				// var_dump($furniturRow->term_id);
 				$furniturPrice=$wpdb->get_row("SELECT * FROM `wp_furns_price` WHERE term_id='$furniturRow->term_id'");
-				var_dump($furniturPrice);
+				// var_dump($furniturPrice);
 				$sum+=$furniturPrice->price*$furnitur['quan'];
 			}
 
