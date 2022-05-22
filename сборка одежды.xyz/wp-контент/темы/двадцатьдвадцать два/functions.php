@@ -213,6 +213,7 @@ function listOfVendors() {
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
 	 $furniturs=$dopPrice['furniturs'];
 	 $material=$dopPrice['material']; 
+	 var_dump($furniturs);
     $response = "<p>";
     global $wpdb;
     global $post;
