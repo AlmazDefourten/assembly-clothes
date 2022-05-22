@@ -203,7 +203,7 @@ function listOfVendors() {
     $cut = json_decode($_REQUEST['cut']);
     $tailoring = json_decode($_REQUEST['tailoring']);
 	$quantity = json_decode($_REQUEST['quantity']);
-    $dopPrice=json_decode($_REQUEST['dopPrice'], true);
+    $dopPrice=json_decode($_REQUEST['dopprice'], true);
 	var_dump($dopPrice);
 	echo $dopPrice['material'][0];
 	 $furniturs=$dopPrice['furniturs'];
