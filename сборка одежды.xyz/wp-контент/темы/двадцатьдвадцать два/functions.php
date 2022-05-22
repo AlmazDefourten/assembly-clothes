@@ -202,10 +202,19 @@ function listOfVendors() {
     $confessionCard = json_decode($_REQUEST['confessionCard']);
     $cut = json_decode($_REQUEST['cut']);
     $tailoring = json_decode($_REQUEST['tailoring']);
-    $dopPrice=json_decode($_REQUEST['dopPrice']);
+	$quantity = json_decode($_REQUEST['quantity']);
+    $dopPrice=json_decode($_REQUEST['dopPrice'], true);
+	$test = json_decode($_REQUEST['dopPrice[furniturs][collar][name]']);
+	var_dump($test);
+	echo $test;
+	var_dump($dopPrice);
+	echo $dopPrice['material'][0];
 	 $furniturs=$dopPrice['furniturs'];
 	 $material=$dopPrice['material']; 
+<<<<<<< HEAD
 	 var_dump($dopPrice);
+=======
+>>>>>>> b96bc64719ce90315b4ffb9445daa81c8267f6ca
     $response = "<p>";
     global $wpdb;
     global $post;
@@ -292,8 +301,21 @@ function listOfVendors() {
 			$time+=$result->layoutPatternTime;
 		}
 		if ($confessionCard == 1) {
+			$result_conf = "123";
 			$sum+=$result->confessionCardPrice;
 			$time+=$result->confessionCardTime;
+			foreach ($dopPrice as $key => $value) {
+				echo $key;
+				echo $value;
+			}
+			$furns = $dopPrice['furniturs'];
+			foreach ($furns as $furn) {
+				$furn_name = $furn->name;
+				echo "<p>$furn_name</p>";
+				$price = $wpdb->get_results("SELECT price FROM `wp_furns_price` WHERE term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.name = $furn_name)") * $furn->quan;
+				$result_conf .= "<p> $furn_name Цена: $price </p>";
+			}
+			echo $result_conf;
 		}
 		if ($cut == 1) {
 			$sum+=$result->cutPrice;
@@ -484,7 +506,9 @@ function listOfVendors() {
 </table>
 
 	 ";
+
     echo $response;
+
     wp_die();
 }
 //ddddd 
