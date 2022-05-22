@@ -212,10 +212,7 @@ function listOfVendors() {
 	echo $dopPrice['material'][0];
 	 $furniturs=$dopPrice['furniturs'];
 	 $material=$dopPrice['material']; 
-<<<<<<< HEAD
 	 var_dump($dopPrice);
-=======
->>>>>>> b96bc64719ce90315b4ffb9445daa81c8267f6ca
     $response = "<p>";
     global $wpdb;
     global $post;
