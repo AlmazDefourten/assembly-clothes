@@ -306,7 +306,7 @@ function listOfVendors() {
 				echo $key;
 				echo $value;
 			}
-			$furns = $dopPrice["furniturs"];
+			$furns = $dopPrice['furniturs'];
 			foreach ($furns as $furn) {
 				$furn_name = $furn->name;
 				echo "<p>$furn_name</p>";
