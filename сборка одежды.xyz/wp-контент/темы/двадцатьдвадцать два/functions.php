@@ -307,8 +307,9 @@ function listOfVendors() {
 			$furns = $dopPrice['furniturs'];
 			foreach ($furns as $furn) {
 				$furn_name = $furn['name'];
-				$price = $wpdb->get_row("SELECT price FROM `wp_furns_price` WHERE term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.term_id = $furn_name)") * $furn['quan'];
-				$result_conf .= "<p> $furn_name Цена: $price->price </p>";
+				$price = $wpdb->get_row("SELECT price FROM `wp_furns_price` WHERE term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.term_id = $furn_name)");
+				$price_quan = $price->price * $furn['quan'];
+				$result_conf .= "<p> $furn_name Цена: $price_quan </p>";
 			}
 			echo $result_conf;
 		}
