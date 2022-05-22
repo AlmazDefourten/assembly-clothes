@@ -252,7 +252,7 @@ function listOfVendors() {
    //  }
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
 	$result_conf = "<table  style='text-align: center;    border: 1px solid red;'>";
-	$result_conf .= "<th>Поставщик</th> <th>Цена</th>";
+	$is_have_rows = false;
     $results = $wpdb->get_results($sql);
 	 $persons=[];
 	 foreach($results as $result){
@@ -316,6 +316,7 @@ function listOfVendors() {
 				$price_quan = $price->price * $furn['quan'];
 				$vendor_name = $price->display_name;
 				if ($price_quan != 0) {
+					$is_have_rows = true;
 					if ($flag == true) {
 						$result_conf .= "<tr> <td> </td> <td>$price_quan</td> <td> $price->name </td></tr>";
 					}
@@ -350,6 +351,9 @@ function listOfVendors() {
 		$persons[]=$person;
 	 }
 	 $result_conf .= "</table>";
+	 if ($is_have_rows == true) {
+	 	$result_conf = '<th>Поставщик</th> <th>Цена</th>'.$result_conf;
+	 }
 	 echo $result_conf;
 
 
