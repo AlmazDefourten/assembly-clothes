@@ -251,7 +251,7 @@ function listOfVendors() {
    //      $sql .= " tailoringPrice, tailoringTime,";
    //  }
     $sql .= " FROM wp_cost_estimate WHERE cardProductId=$card_id";
-	$result_conf = "<table>";
+	$result_conf = "<table  style='text-align: center;    border: 1px solid;'>";
     $results = $wpdb->get_results($sql);
 	 $persons=[];
 	 foreach($results as $result){
