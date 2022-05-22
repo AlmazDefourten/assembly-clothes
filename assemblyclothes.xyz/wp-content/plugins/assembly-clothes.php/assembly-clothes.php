@@ -506,4 +506,3 @@ function add_estimate(){
 	add_action('admin_post_nopriv_estimate_post', 'add_estimate');
 	add_action('admin_post_estimate_post', 'add_estimate');
 ?>
-//
