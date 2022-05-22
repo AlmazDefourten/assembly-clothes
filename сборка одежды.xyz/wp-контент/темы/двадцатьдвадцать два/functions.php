@@ -319,7 +319,7 @@ function listOfVendors() {
 					$result_conf .= "<tr> <td> </td> <td>$price_quan</td> <td> $price->name </td></tr>";
 				}
 				else {
-					$result_conf .= "<tr><td> $price->display_name </td> <td>$price_quan</td> <td> $price->name </td></tr>"
+					$result_conf .= "<tr><td> $price->display_name </td> <td>$price_quan</td> <td> $price->name </td></tr>";
 					$flag = true;
 				}
 			}
