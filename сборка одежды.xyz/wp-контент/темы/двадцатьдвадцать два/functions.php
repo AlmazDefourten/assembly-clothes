@@ -353,8 +353,11 @@ function listOfVendors() {
 	 $result_conf .= "</table>";
 	 $result_conf_echo = "";
 	 if ($is_have_rows == true) {
-		$result_conf_echo .= "<table  style='text-align: center;    border: 1px solid red;'><th>Поставщик</th> <th>Цена</th>";
+		$result_conf_echo .= "<table  style='text-align: center;    border: 1px solid;'><th>Поставщик</th> <th>Цена</th>";
 		$result_conf_echo .=  $result_conf;
+	 }
+	 else {
+		 $result_conf_echo = "<p style='solid red'>Для вывода цен по конфессионной карте разместите фурнитуру или выберите материал</p>";
 	 }
 	 echo $result_conf_echo;
 
