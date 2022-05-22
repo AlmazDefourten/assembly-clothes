@@ -212,9 +212,7 @@ function listOfVendors() {
 	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
 	$req = $_REQUEST['dopPrice'];
-	echo $req;
-	$new_req = remove_utf8_bom($req);
-	$req_decode = json_decode($new_req);
+	$req_decode = json_decode($req, false, 512, JSON_UNESCAPED_SLASHES);
 	var_dump($req_decode);
 	echo $req_decode;
 	var_dump($quantity);
