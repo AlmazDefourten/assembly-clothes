@@ -211,17 +211,8 @@ function listOfVendors() {
     $tailoring = json_decode($_REQUEST['tailoring']);
 	$quantity = json_decode($_REQUEST['dopPrice']);
     $dopPrice=json_decode($_REQUEST['dopPrice'], true);
-	$req = $_REQUEST['dopPrice'];
-	$req_decode = json_decode($req);
-	var_dump($req_decode);
-	var_dump($quantity);
-	var_dump($test);
-	echo $test;
-	var_dump($dopPrice);
-	echo $dopPrice['material'][0];
 	 $furniturs=$dopPrice['furniturs'];
 	 $material=$dopPrice['material']; 
-	 var_dump($dopPrice);
     $response = "<p>";
     global $wpdb;
     global $post;
@@ -315,11 +306,11 @@ function listOfVendors() {
 				echo $key;
 				echo $value;
 			}
-			$furns = $dopPrice['furniturs'];
+			$furns = $dopPrice["furniturs"];
 			foreach ($furns as $furn) {
 				$furn_name = $furn->name;
 				echo "<p>$furn_name</p>";
-				$price = $wpdb->get_results("SELECT price FROM `wp_furns_price` WHERE term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.name = $furn_name)") * $furn->quan;
+				$price = $wpdb->get_results("SELECT price FROM `wp_furns_price` WHERE term_id=(SELECT DISTINCT t.term_id FROM wp_posts AS p INNER JOIN wp_term_relationships AS tr ON p.id = tr.object_id INNER JOIN wp_term_taxonomy AS tt ON tt.term_taxonomy_id = tr.term_taxonomy_id INNER JOIN wp_terms AS t ON t.term_id = tt.term_id WHERE p.ID = $card_id AND tt.taxonomy = 'pa_фурнитура' AND p.post_type = 'product' AND tt.taxonomy LIKE 'pa_%' AND t.name = '$furn_name')") * $furn->quan;
 				$result_conf .= "<p> $furn_name Цена: $price </p>";
 			}
 			echo $result_conf;
