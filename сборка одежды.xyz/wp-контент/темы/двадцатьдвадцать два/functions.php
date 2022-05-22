@@ -214,7 +214,6 @@ function listOfVendors() {
 	$req = $_REQUEST['dopPrice'];
 	echo $req;
 	$new_req = remove_utf8_bom($req);
-	$new_req = str_replace("\\", "", $new_req);
 	$req_decode = json_decode($new_req);
 	var_dump($req_decode);
 	echo $req_decode;
