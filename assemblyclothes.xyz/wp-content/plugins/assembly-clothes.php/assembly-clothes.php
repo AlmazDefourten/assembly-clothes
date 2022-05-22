@@ -141,7 +141,7 @@ function formSupplierFun($attrs){
 		<td><?=$sup->cutTime?></td>
 		<td><?=$sup->tailoringTime?></td>
 		</tr>
-		<tr style="background-color: #cccccc">
+		<tr style="background-color: #1a4548">
     	<td colspan="100%"></td>
   		</tr>
 		<?php

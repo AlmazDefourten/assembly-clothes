@@ -347,7 +347,7 @@ function listOfVendors() {
 				$result_conf .= "<tr><td></td><td> $price_mat->price </td> <td> $price_mat->name </td></tr>";
 			}
 			if ($flag == true) {
-				$result_conf .= '<tr style="background-color: #cccccc"><td colspan="100%"></td></tr>';
+				$result_conf .= '<tr style="background-color: #1a4548"><td colspan="100%"></td></tr>';
 			}	
 		}
 		if ($cut == 1) {
