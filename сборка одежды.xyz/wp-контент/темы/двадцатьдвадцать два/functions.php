@@ -353,7 +353,7 @@ function listOfVendors() {
 	 $result_conf .= "</table>";
 	 $result_conf_echo = "";
 	 if ($is_have_rows == true) {
-		$result_conf_echo .= "<table  style='text-align: center;    border: 1px solid;'><th>Поставщик</th> <th>Цена</th>";
+		$result_conf_echo .= "<table  style='text-align: center;    border: 1px solid;'><th>Поставщик</th> <th>Цена</th> <th>Название изделия</th>";
 		$result_conf_echo .=  $result_conf;
 	 }
 	 else {
