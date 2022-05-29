@@ -375,7 +375,9 @@ function listOfVendors() {
 	 else {
 		 $result_conf_echo = "<p style='solid red' class='Error'>Для вывода цен по конфекционной карте разместите фурнитуру или выберите материал</p>";
 	 }
-	 echo $result_conf_echo;
+	 if ($confessionCard == 1) {
+	 	echo $result_conf_echo;
+	 }
 
 
     $personsPriceSort=sortObjectSetBy($persons,'sum');
